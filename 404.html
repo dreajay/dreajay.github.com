@@ -1,5 +1,170 @@
 
   
+    <!DOCTYPE HTML>
+<html lang="zh-CN" xmlns:wb="http://open.weibo.com/wb">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>关于 | dreajay&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="dreajay">
+    
+    <meta name="description" content="这里是dreajay的博客专栏，内容主要包括IT技术、读书笔记和一些生活随笔等，欢迎来到dreajay的博客！">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="idreajay">
+    <meta name="twitter:title" content="关于 | dreajay&#39;s blog">
+      
+    
+    
+    <link rel="alternate" href="atom.xml" title="dreajay&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+      <body>
+        <header>
+          <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="dreajay&#39;s blog" title="dreajay&#39;s blog"></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="dreajay&#39;s blog">dreajay&#39;s blog</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">博客</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+						<li><a href="/atom.xml">RSS订阅</a></li>
+					
+					<li>
+					
+					<form class="search" action="//baidu.com/s" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="wd" autocomplete="off" maxlength="30" placeholder="搜索">
+                        <input name="tn" type="hidden" value="bds">
+                        <input name="cl" type="hidden" value="3">
+                        <input name="ct" type="hidden" value="2097152">
+						<input type="hidden" name="si" value="dreajay.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</ul></nav>			
+</div>
+
+        </header>
+        <div id="container">
+          <!--中间内容 -->
+        </div>
+        <footer><div id="footer">
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font">
+		
+		<a href="http://weibo.com/2583230784" target="_blank" title="weibo"></a>
+		
+		
+		<a href="https://twitter.com/idreajay" target="_blank" title="twitter"></a>
+		
+		
+		<a href="https://github.com/dreajay" target="_blank" title="github"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="pacman">pacman</a> © 2014 
+		
+		<a href="http://dreajay.github.io" target="_blank" title="dreajay">dreajay</a>
+		
+		</p>
+</div>
+</footer>
+        <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+<!-- 腾讯404页面 -->  
     <script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8"></script>
+
+
+</body>
+</html>
+     
+
+
+  
+
+
   
 
