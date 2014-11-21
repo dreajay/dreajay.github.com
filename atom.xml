@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[dreajay's blog]]></title>
+  
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://dreajay.github.io/"/>
+  <updated>2014-11-21T15:38:40.468Z</updated>
+  <id>http://dreajay.github.io/</id>
+  
+  <author>
+    <name><![CDATA[dreajay]]></name>
+    <email><![CDATA[dreajay@163.com]]></email>
+  </author>
+  
+  <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[mybatis实战之构建SqlSessionFactory]]></title>
+    <link href="http://dreajay.github.io/2014/11/21/mybatis%E5%AE%9E%E6%88%98%E4%B9%8BSqlSessionFactory/"/>
+    <id>http://dreajay.github.io/2014/11/21/mybatis实战之SqlSessionFactory/</id>
+    <published>2014-11-21T03:40:57.000Z</published>
+    <updated>2014-11-21T07:46:05.000Z</updated>
+    <content type="html"><![CDATA[<p>SqlSessionFactory是mybatis的重要角色，是mybatis的整个程序的入口.<br><a id="more"></a></p>
+<ol>
+<li><p>SqlSessionFactory生命周期<br>SqlSessionFactory生命周期为贯穿整个应用程序,一般保持生命周期都使用同一个实例，所以SqlSessionFactory应该保持全局静态变量或使用单利模式来使用它。如果有多个数据源的时候，需要创建不同的SqlSessionFactory。</p>
+</li>
+<li><p>构建SqlSessionFactory<br>在mybatis中构建SqlSessionFactory有两种方式，一种是根据xml配置文件方式，另一种是也手动编写Java代码方式，手动构建比较繁琐，也不好维护，推荐使用xml配置方式，下面是详细代码。</p>
+</li>
+</ol>
+<figure class="highlight Java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="javadoc">/**</span></div><div class="line"> * SqlSessionFactory生命周期为贯穿整个应用程序,一般保持生命周期都使用同一个实例，所以SqlSessionFactory应该保持全局静态变量或使用单利模式来使用它</div><div class="line"> * </div><div class="line"> *<span class="javadoctag"> @author</span> dreajay</div><div class="line"> * </div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SqlSessionFactoryManager</span> </span>{</div><div class="line">    <span class="comment">// SqlSessionFactory一个实例对应一个数据库配置</span></div><div class="line">    <span class="keyword">public</span> SqlSessionFactory sqlSessionFactory;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> SqlSessionFactoryManager INSTANCE = <span class="keyword">new</span> SqlSessionFactoryManager();</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="title">SqlSessionFactoryManager</span>() {</div><div class="line">        sqlSessionFactory = buildSqlSessionFactoryFromXML(<span class="string">"SqlMapConfig.xml"</span>);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> SqlSessionFactory <span class="title">getSqlSessionFactory</span>() {</div><div class="line">        <span class="keyword">return</span> INSTANCE.sqlSessionFactory;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="javadoc">/**</span></div><div class="line">     * 根据配置文件创建SqlSessionFactory</div><div class="line">     * </div><div class="line">     *<span class="javadoctag"> @param</span> SqlMapConfigFile</div><div class="line">     *            SqlMapConfig配置文件，文件应该放在当前的classpath中</div><div class="line">     *<span class="javadoctag"> @return</span> SqlSessionFactory</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> SqlSessionFactory <span class="title">buildSqlSessionFactoryFromXML</span>(String SqlMapConfigFile) {</div><div class="line">        Reader reader = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> {</div><div class="line">            reader = Resources.getResourceAsReader(SqlMapConfigFile);</div><div class="line">            <span class="comment">// SqlSessionFactoryBuilder创建完SqlSessionFactory就不需要了，生命周期在方法内，不需要保存本地变量</span></div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> SqlSessionFactoryBuilder().build(reader);</div><div class="line">        } <span class="keyword">catch</span> (IOException e) {</div><div class="line">            e.printStackTrace();</div><div class="line">            Log4jUtil.error(SqlSessionFactoryManager.class, <span class="string">"创建SqlSessionFactory出错"</span>, e);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        } <span class="keyword">finally</span> {</div><div class="line">            <span class="keyword">if</span> (reader != <span class="keyword">null</span>) {</div><div class="line">                <span class="keyword">try</span> {</div><div class="line">                    reader.close();</div><div class="line">                    reader = <span class="keyword">null</span>;</div><div class="line">                } <span class="keyword">catch</span> (IOException e) {</div><div class="line">                }</div><div class="line">            }</div><div class="line">        }</div><div class="line"></div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="javadoc">/**</span></div><div class="line">     * 手动创建SqlSessionFactory</div><div class="line">     * </div><div class="line">     *<span class="javadoctag"> @return</span> SqlSessionFactory</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> SqlSessionFactory <span class="title">buildSqlSessionFactoryFromJava</span>() {</div><div class="line">        DataSource dataSource = <span class="keyword">null</span>;<span class="comment">// 数据库连接</span></div><div class="line">        <span class="comment">// dataSource = BlogDataSourceFactory.getBlogDataSource();</span></div><div class="line">        TransactionFactory transactionFactory = <span class="keyword">new</span> JdbcTransactionFactory();</div><div class="line">        Environment environment = <span class="keyword">new</span> Environment(<span class="string">"development"</span>, transactionFactory, dataSource);</div><div class="line">        Configuration configuration = <span class="keyword">new</span> Configuration(environment);</div><div class="line">        configuration.addMapper(UserMapper.class);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> SqlSessionFactoryBuilder().build(configuration);</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>SqlSessionFactory是mybatis的重要角色，是mybatis的整个程序的入口.<br>]]>
+    
+    </summary>
+    
+      <category term="java" scheme="http://dreajay.github.io/tags/java/"/>
+    
+      <category term="mybatis" scheme="http://dreajay.github.io/tags/mybatis/"/>
+    
+      <category term="SqlSessionFactory" scheme="http://dreajay.github.io/tags/SqlSessionFactory/"/>
+    
+      <category term="java" scheme="http://dreajay.github.io/categories/java/"/>
+    
+      <category term="mybatis" scheme="http://dreajay.github.io/categories/java/mybatis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <link href="http://dreajay.github.io/2014/11/19/hello-world/"/>
+    <id>http://dreajay.github.io/2014/11/19/hello-world/</id>
+    <published>2014-11-19T12:54:32.000Z</published>
+    <updated>2014-11-19T12:54:32.000Z</updated>
+    <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">trobuleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick_Start">Quick Start</h2>
+<h3 id="Create_a_new_post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run_server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate_static_files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[设计模式之单例模式]]></title>
+    <link href="http://dreajay.github.io/2014/11/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://dreajay.github.io/2014/11/19/设计模式之单例模式/</id>
+    <published>2014-11-18T17:49:49.000Z</published>
+    <updated>2014-11-21T01:00:39.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="单例模式">单例模式</h2>
+<p>设计模式之单例模式，在很多场景下，我们需要用到单例模式。</p>
+<h3 id="定义">定义</h3>
+<p>Singleton模式是指在应用程序中一个类Class只有一个实例存在。</p>
+<a id="more"></a>
+
+<h3 id="创建单例模式的方法">创建单例模式的方法</h3>
+<h4 id="第一种">第一种</h4>
+<p>在程序运行时就创建静态Singleton实例，这样会导致即使不使用，内存中也会存在。</p>
+<figure class="highlight Java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">class Singleton {</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton singleton = <span class="keyword">new</span> Singleton();</div><div class="line">    <span class="comment">//私有构造器</span></div><div class="line">    <span class="keyword">private</span> <span class="title">Singleton</span>() {   </div><div class="line">    }</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span>() {</div><div class="line">        <span class="keyword">return</span> singleton;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h4 id="第二种">第二种</h4>
+<p>当需要使用的时候再进行创建，使用synchronized锁保证只能生成一个实例，但synchronized会导致性能问题。</p>
+<figure class="highlight Java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class Singleton {</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton = <span class="keyword">null</span>;</div><div class="line">    <span class="comment">//私有构造器</span></div><div class="line">    <span class="keyword">private</span> <span class="title">Singleton</span>() {   </div><div class="line">    }</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">getInstance</span>() {</div><div class="line">        <span class="keyword">if</span>(singleton == <span class="keyword">null</span>) {</div><div class="line">            sinleton = <span class="keyword">new</span> Singleton();</div><div class="line">        }</div><div class="line">        <span class="keyword">return</span> sinleton;</div><div class="line">    } </div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h4 id="第三种">第三种</h4>
+<p>下面这种方法是上面方法的改进，但可能造成创建多个实例问题，假如第一次在创建对象的时候，另外一个线程已经进入if(singleton == null) 中等待synchronized，最后执行完就会产生两个Singleton，导致单例失效。</p>
+<figure class="highlight Java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class Singleton {</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton = <span class="keyword">null</span>;</div><div class="line">    <span class="comment">//私有构造器</span></div><div class="line">    <span class="keyword">private</span> <span class="title">Singleton</span>() {   </div><div class="line">    }</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span>() {</div><div class="line">        <span class="keyword">if</span>(singleton == <span class="keyword">null</span>) {</div><div class="line">            <span class="keyword">synchronized</span>(Singleton.class) {</div><div class="line">                sinleton = <span class="keyword">new</span> Singleton();</div><div class="line">            }</div><div class="line">        }</div><div class="line">        <span class="keyword">return</span> sinleton;</div><div class="line">    } </div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h4 id="第四种">第四种</h4>
+<p>这个方法避免了第三种创建多个实例对象的问题，并且避免了多个线程排队等候的现象。</p>
+<figure class="highlight Java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">class Singleton {</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton = <span class="keyword">null</span>;</div><div class="line">    <span class="comment">//私有构造器</span></div><div class="line">    <span class="keyword">private</span> <span class="title">Singleton</span>() {   </div><div class="line">    }</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">getInstance</span>() {</div><div class="line">        <span class="keyword">if</span>(singleton == <span class="keyword">null</span>) {</div><div class="line">            <span class="keyword">synchronized</span>(Singleton.class){</div><div class="line">                <span class="keyword">if</span>(singleton == <span class="keyword">null</span>) {</div><div class="line">                    sinleton = <span class="keyword">new</span> Singleton();</div><div class="line">                }</div><div class="line">            }</div><div class="line">        }</div><div class="line">        <span class="keyword">return</span> sinleton;</div><div class="line">    } </div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h3 id="总结">总结</h3>
+<p>推荐使用第一种方法。<br>注意：在分布式式中，程序可能会跨服务器、跨JVM，包含多个类装载器，Singleton可能会被不同的类装载器装载，这样就会导致Singleton失效。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="单例模式">单例模式</h2>
+<p>设计模式之单例模式，在很多场景下，我们需要用到单例模式。</p>
+<h3 id="定义">定义</h3>
+<p>Singleton模式是指在应用程序中一个类Class只有一个实例存在。</p>
+]]>
+    
+    </summary>
+    
+      <category term="设计模式" scheme="http://dreajay.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="单例模式" scheme="http://dreajay.github.io/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="Singleton模式" scheme="http://dreajay.github.io/tags/Singleton%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="设计模式" scheme="http://dreajay.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+</feed>
