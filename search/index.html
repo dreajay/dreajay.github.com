@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>关于 | dreajay&#39;s blog</title>
+    <title>搜索 | dreajay&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="dreajay">
@@ -16,7 +16,7 @@
     
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="idreajay" />
-    <meta name="twitter:title" content="关于 | dreajay&#39;s blog" />
+    <meta name="twitter:title" content="搜索 | dreajay&#39;s blog" />
       
     
     
@@ -78,7 +78,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/about/index.html" title="关于" itemprop="url">关于</a>
+      <a href="/search/index.html" title="搜索" itemprop="url">搜索</a>
   </h1>
   <!-- 显示作者
   <p class="article-author">By
@@ -87,23 +87,82 @@
     </p>
   -->  
   <p class="article-time">
-    <time datetime="2014-11-20T15:10:56.000Z" itemprop="datePublished">2014-11-20</time>
-    更新日期:<time datetime="2014-11-20T15:24:05.000Z" itemprop="dateModified">2014-11-20</time>
+    <time datetime="2014-11-22T04:06:56.000Z" itemprop="datePublished">2014-11-22</time>
+    更新日期:<time datetime="2014-11-22T07:16:15.000Z" itemprop="dateModified">2014-11-22</time>
     
   </p>
 </header>
 
 	<div class="article-content">
 		
+
+    <script type="text/javascript">document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E%3Cscript charset="utf-8" src="http://znsv.baidu.com/customer_search/api/js?sid=17834434419516021878') + '&plate_url=' + (encodeURIComponent(window.location.href)) + '&t=' + (Math.ceil(new Date()/3600000)) + unescape('"%3E%3C/script%3E'));</script>
 		
-		<p>大家好，我是戴竣杰，英文名称为dreajay，dreajay组成的词为dream和jay，是我的中文英译，这是我的个人博客专栏，主要记录了一些技术知识、技术文章、和一些个人的生活随记等。<br>关注我:</p>
-<ul>
-<li>微博：<a href="http://weibo.com/2583230784/" target="_blank" rel="external">dreajay</a> </li>
-<li>豆瓣：<a href="http://www.douban.com/people/72514701/" target="_blank" rel="external">dreajay</a></li>
-<li>知乎：<a href="http://www.zhihu.com/people/dreajay-day" target="_blank" rel="external">dreajay</a></li>
-<li>邮箱：dreajay@163.com</li>
-</ul>
-  
+		<div id="baiduSearch" style="width:100%;height:1000px;padding:0px;margin:0px"><br>    <span id="search_prompt"></span><br>    <iframe id="baidu-search" style="position:absolute;left:0px;width:100%;height:1000px;"><br>    </iframe><br></div>
+
+<script language="JavaScript">
+function createRequestObject() {
+  FORM_DATA = new Object();
+    // The Object ("Array") where our data will be stored.
+  separator = ',';
+    // The token used to separate data from multi-select inputs
+  query = '' +decodeURI( this.location);
+  qu = query
+    // Get the current URL so we can parse out the data.
+    // Adding a null-string '' forces an implicit type cast
+    // from property to string, for NS2 compatibility.
+  query = query.substring((query.indexOf('?')) + 1);
+    // Keep everything after the question mark '?'.
+  if (query.length < 1) { return false; }  // Perhaps we got some bad data?
+  keypairs = new Object();
+  numKP = 1;
+    // Local vars used to store and keep track of name/value pairs
+    // as we parse them back into a usable form.
+  while (query.indexOf('&') > -1) {
+    keypairs[numKP] = query.substring(0,query.indexOf('&'));
+    query = query.substring((query.indexOf('&')) + 1);
+    numKP++;
+      // Split the query string at each '&', storing the left-hand side
+      // of the split in a new keypairs[] holder, and chopping the query
+      // so that it gets the value of the right-hand string.
+  }
+  keypairs[numKP] = query;
+    // Store what's left in the query string as the final keypairs[] data.<
+  for (i in keypairs) {
+    keyName = keypairs[i].substring(0,keypairs[i].indexOf('='));
+      // Left of '=' is name.
+    keyValue = keypairs[i].substring((keypairs[i].indexOf('=')) + 1);
+      // Right of '=' is value.
+    while (keyValue.indexOf('+') > -1) {
+      keyValue = keyValue.substring(0,keyValue.indexOf('+')) + ' ' + keyValue.substring(keyValue.indexOf('+') + 1);
+        // Replace each '+' in data string with a space.
+    }
+    keyValue = unescape(keyValue);
+      // Unescape non-alphanumerics
+    if (FORM_DATA[keyName]) {
+      FORM_DATA[keyName] = FORM_DATA[keyName] + separator + keyValue;
+        // Object already exists, it is probably a multi-select input,
+        // and we need to generate a separator-delimited string
+        // by appending to what we already have stored.
+    } else {
+      FORM_DATA[keyName] = keyValue;
+        // Normal case: name gets value.
+    }
+  }
+  return FORM_DATA;
+}
+FORM_DATA = createRequestObject();
+  // This is the array/object containing the GET data.
+  // Retrieve information with 'FORM_DATA [ key ] = value'.
+var q_str=FORM_DATA['wd'];
+if (q_str){
+document.getElementById('search_prompt').innerHTML = '正在加载……';   
+document.getElementById('baidu-search').src='http://zhannei.baidu.com/cse/search?q='+q_str+'&entry=1&s=17834434419516021878';
+document.getElementById('baidu-search').onload=function(){document.getElementById('search_prompt').innerHTML = '';};
+}else{
+document.getElementById('search_prompt').innerHTML = '请在上方搜索框中输入搜索内容，示例：<a href="/search/?q=blog">blog</a>。';
+}
+</script>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-share" id="share">
@@ -138,7 +197,7 @@ var jiathis_config = {data_track_clickback:'true'};
 	<!-- 多说-->
 
 <section class="comment">
-<div class="ds-thread" data-thread-key="page-关于" data-title="关于" data-url="http://dreajay.github.io/about/index.html"></div>
+<div class="ds-thread" data-thread-key="page-搜索" data-title="搜索" data-url="http://dreajay.github.io/search/index.html"></div>
 </section>
 <!-- disqus-->
 
