@@ -4,7 +4,7 @@
   <subtitle><![CDATA[坚持做一件事，一定会成功！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://dreajay.github.io/"/>
-  <updated>2014-11-22T07:31:50.207Z</updated>
+  <updated>2014-11-25T01:15:47.877Z</updated>
   <id>http://dreajay.github.io/</id>
   
   <author>
@@ -48,33 +48,92 @@
   </entry>
   
   <entry>
-    <title><![CDATA[Hello World]]></title>
-    <link href="http://dreajay.github.io/2014/11/19/hello-world/"/>
-    <id>http://dreajay.github.io/2014/11/19/hello-world/</id>
+    <title><![CDATA[hexo+github搭建博客系统]]></title>
+    <link href="http://dreajay.github.io/2014/11/19/hexo+github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/"/>
+    <id>http://dreajay.github.io/2014/11/19/hexo+github搭建博客系统/</id>
     <published>2014-11-19T12:54:32.000Z</published>
-    <updated>2014-11-19T12:54:32.000Z</updated>
-    <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">trobuleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2>
-<h3 id="Create_a_new_post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+    <updated>2014-11-25T01:15:15.000Z</updated>
+    <content type="html"><![CDATA[<p>个人博客大概包含了以下几个模块：首页、文章存档、文章分类、关于、友情链接，有些博客资源丰富，功能强大，还会加上一些诸如站内搜索、评论、分享、微博秀、广告等一些功能，很多框架都可以快速搭建起一个包含以上功能的博客，关于有哪些框架可以搭建博客，可以移步知乎讨论：<a href="http://www.zhihu.com/question/21981094" target="_blank" rel="external">应用github pages创建自己的个人博客</a>。<br><a id="more"></a><br>本博客是用hexo+github搭建的，选择<a href="http://hexo.io/" target="_blank" rel="external">hexo</a>是因为它比较简单，选择<a href="https://github.com" target="_blank" rel="external">github</a>因为它免费，哈哈，免费的东西总是能让人趋之若鹜。本博客的搭建也是参考很多他人资料，会在后面列出，我这里总结一下自己搭建博客各个模块用到的资源。</p>
+<h1 id="创建github博客">创建github博客</h1>
+<p>IT人员应该人手必备一个<a href="https://github.com" target="_blank" rel="external">github</a>账号，否则无法跟上这个逼格的年代，先注册一个github账号，然后创建自己的博客GitHub Pages，仓库名字固定结尾github.io，加上你的前缀，比如xxx.github.io。这里不会具体展开，相信你能做到：<a href="http://jingyan.baidu.com/article/ed2a5d1f3732cb09f7be1745.html" target="_blank" rel="external">http://jingyan.baidu.com/article/ed2a5d1f3732cb09f7be1745.html</a>。</p>
+<h1 id="hexo">hexo</h1>
+<h2 id="安装">安装</h2>
+<p>因为<a href="http://hexo.io/" target="_blank" rel="external">hexo</a>是居于note.js的，所以要安装hexo，必须先安装note.js环境，这里并不一定需要很深入的了解notejs，如果你只想简单的使用hexo的话，安装很简单，直接到官网下载安装：<a href="http://www.nodejs.org" target="_blank" rel="external">http://www.nodejs.org</a>，安装完了notejs，打开命令行[cmd、git bash]执行命令即可安装hexo：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g hexo</div></pre></td></tr></table></figure>
 
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<h2 id="快速开始">快速开始</h2>
+<p><a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>的官网有很多文档资料，花一点时间看看文档，对你很有帮助，虽然是英文，但是不难，下面介绍几个常用的命令来搭建hexo博客。</p>
+<h3 id="创建博客">创建博客</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo init c:/blog</div><div class="line">$ npm install</div></pre></td></tr></table></figure>
 
+<h3 id="新建一篇文章">新建一篇文章</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"test"</span></div></pre></td></tr></table></figure>
+
+<p>在sourece/_posts目录下会生成一个test.md文件，md为markdown文件格式，你可以用记事本来编辑，不过我更加推荐sublime text这款编辑器。markdown非常简单，更多请参考：<a href="https://github.com/riku/Markdown-Syntax-CN" target="_blank" rel="external">Markdown 语法 (简体中文版)</a>，在线编辑工具：<a href="https://www.zybuluo.com/mdeditor" target="_blank" rel="external">作业部落Cmd</a>, <a href="http://maxiang.info/" target="_blank" rel="external">马克飞象</a>。</p>
+<h3 id="运行服务">运行服务</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo s</div></pre></td></tr></table></figure>
+
+<p>访问<a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a>，即可看到刚才的文章。</p>
 <p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<h3 id="生成静态文件">生成静态文件</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo g</div></pre></td></tr></table></figure>
 
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<h3 id="发布到github">发布到github</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo d</div></pre></td></tr></table></figure>
 
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+<p>需要在_config.yml配置你的github博客地址。</p>
+<h2 id="hexo主题">hexo主题</h2>
+<p>hexo有很多漂亮的主题：<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">https://github.com/hexojs/hexo/wiki/Themes</a>，你可以拿来修改成自己的，再次提醒参考<a href="http://hexo.io/docs/" target="_blank" rel="external">hexo</a>官方文档对你很有帮助。</p>
+<h1 id="功能扩展">功能扩展</h1>
+<p>给博客添加一些额外的功能，比如添加RSS订阅、分享、评论、404页面等待，这里不会具体展开怎么去做，具体还是需要自己去实践，可参看前人博客。</p>
+<h2 id="网站图标">网站图标</h2>
+<p><a href="http://www.bitbug.net/" target="_blank" rel="external">http://www.bitbug.net/</a><br><a href="http://creatr.cc/creatr/" target="_blank" rel="external">http://creatr.cc/creatr/</a></p>
+<h2 id="分享">分享</h2>
+<p>加网：<a href="http://www.jiathis.com/" target="_blank" rel="external">http://www.jiathis.com/</a><br>百度：<a href="http://share.baidu.com/code" target="_blank" rel="external">http://share.baidu.com/code</a><br>bShare：<a href="http://www.bshare.cn/" target="_blank" rel="external">http://www.bshare.cn/</a></p>
+<h2 id="评论">评论</h2>
+<p>多说：<a href="http://duoshuocom/" target="_blank" rel="external">http://duoshuo.com/</a> 国内用得多，方便快速<br>disqus：<a href="https://www.disqus.com/" target="_blank" rel="external">https://www.disqus.com/</a> 功能强大</p>
+<h2 id="新浪微博秀">新浪微博秀</h2>
+<p>微博秀：<a href="http://open.weibo.com/widget/like.php" target="_blank" rel="external">http://open.weibo.com/widget/like.php</a></p>
+<h2 id="fork_me_on_github">fork me on github</h2>
+<p>给博客加入github的fork链接：<a href="https://github.com/blog/273-github-ribbons" target="_blank" rel="external">https://github.com/blog/273-github-ribbons</a></p>
+<h2 id="回到顶部">回到顶部</h2>
+<p>参考文章：<a href="http://wuchong.me/blog/2014/01/08/hexo-scrollup/" target="_blank" rel="external">http://wuchong.me/blog/2014/01/08/hexo-scrollup/</a></p>
+<h2 id="百度统计">百度统计</h2>
+<p><a href="http://tongji.baidu.com/web/welcome/login" target="_blank" rel="external">http://tongji.baidu.com/web/welcome/login</a></p>
+<h2 id="站内搜索">站内搜索</h2>
+<p>百度站长平台包含站内搜索并且还有其他很多功能：<a href="http://zhanzhang.baidu.com/" target="_blank" rel="external">http://zhanzhang.baidu.com/</a></p>
+<h2 id="RSS订阅和sitemap">RSS订阅和sitemap</h2>
+<p>RSS和sitemap有现成的插件可以很快集成到hexo，安装插件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-generator-feed</div><div class="line">$ npm install hexo-generator-sitemap</div></pre></td></tr></table></figure>
+
+<p>修改_config.yml，增加以下内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Plugins:</div><div class="line">- hexo-generator-feed</div><div class="line">- hexo-generator-sitemap</div><div class="line"></div><div class="line"><span class="comment">#Feed Atom</span></div><div class="line">feed:</div><div class="line">  <span class="built_in">type</span>: atom</div><div class="line">  path: atom.xml</div><div class="line">  limit: <span class="number">20</span></div><div class="line"></div><div class="line"><span class="comment">#sitemap</span></div><div class="line">sitemap:</div><div class="line">  path: sitemap.xml</div></pre></td></tr></table></figure>
+
+<p>执行命令 hexo d 能生成下面2个文件即表示成功：<br>xxx/public/atom.xml<br>xxx/public/sitemap.xml</p>
+<h2 id="404页面">404页面</h2>
+<p>当找不到你的网页时，提供一个友好的404会显得你更加专业。<br>腾讯404公益页面：<a href="http://www.qq.com/404/" target="_blank" rel="external">http://www.qq.com/404/</a></p>
+<h2 id="图床">图床</h2>
+<p>图床是用来存储你的图片的，你上传一张本地图片，图床会给你生成一个链接，你引用链接即可找到你的图片，有很多免费的图床可用：新浪、七牛。</p>
+<h1 id="参考资料">参考资料</h1>
+<hr>
+<p>[1] <a href="http://cnfeat.com/2014/05/10/2014-05-11-how-to-build-a-blog/" target="_blank" rel="external">如何搭建一个独立博客——简明Github Pages与Hexo教程</a> by cnfeat<br>[2] <a href="http://zipperary.com/categories/hexo/" target="_blank" rel="external">hexo 系列教程</a> by zippera<br>[3] <a href="http://zipperary.com/2013/05/26/ssh-errors-with-github/" target="_blank" rel="external">Git push时重复输入用户名密码的问题</a> by zippera</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io]]>
+    <![CDATA[<p>个人博客大概包含了以下几个模块：首页、文章存档、文章分类、关于、友情链接，有些博客资源丰富，功能强大，还会加上一些诸如站内搜索、评论、分享、微博秀、广告等一些功能，很多框架都可以快速搭建起一个包含以上功能的博客，关于有哪些框架可以搭建博客，可以移步知乎讨论：<a href="http://www.zhihu.com/question/21981094" target="_blank" rel="external">应用github pages创建自己的个人博客</a>。<br>]]>
+    
     </summary>
+    
+      <category term="博客" scheme="http://dreajay.github.io/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="hexo" scheme="http://dreajay.github.io/tags/hexo/"/>
+    
+      <category term="github" scheme="http://dreajay.github.io/tags/github/"/>
+    
+      <category term="markdown" scheme="http://dreajay.github.io/tags/markdown/"/>
+    
+      <category term="博客" scheme="http://dreajay.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="hexo" scheme="http://dreajay.github.io/categories/%E5%8D%9A%E5%AE%A2/hexo/"/>
     
   </entry>
   
