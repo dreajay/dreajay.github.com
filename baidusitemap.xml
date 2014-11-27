@@ -1,56 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title><![CDATA[dreajay's blog]]></title>
-  <subtitle><![CDATA[戴竣杰的博客专栏，坚持做一件事，一定会成功！]]></subtitle>
-  <link href="/atom.xml" rel="self"/>
-  <link href="http://dreajay.github.io/"/>
-  <updated>2014-11-27T08:31:41.883Z</updated>
-  <id>http://dreajay.github.io/</id>
-  
-  <author>
-    <name><![CDATA[dreajay]]></name>
-    <email><![CDATA[dreajay@163.com]]></email>
-  </author>
-  
-  <generator uri="http://zespia.tw/hexo/">Hexo</generator>
-  
-  <entry>
-    <title><![CDATA[进化：屌丝的互联网逆袭之路]]></title>
-    <link href="http://dreajay.github.io/2014/11/25/%E8%BF%9B%E5%8C%96%EF%BC%9A%E5%B1%8C%E4%B8%9D%E7%9A%84%E4%BA%92%E8%81%94%E7%BD%91%E9%80%86%E8%A2%AD%E4%B9%8B%E8%B7%AF/"/>
-    <id>http://dreajay.github.io/2014/11/25/进化：屌丝的互联网逆袭之路/</id>
-    <published>2014-11-25T05:10:13.000Z</published>
-    <updated>2014-11-25T05:33:33.000Z</updated>
-    <content type="html"><![CDATA[<p>这是我在CSDN参加《<a href="http://blog.csdn.net/blogdevteam/article/details/40047403" target="_blank" rel="external">有奖试读&amp;征文——我们在互联网上奋斗的故事</a>》活动写的一篇读后感，并且获奖。</p>
-<p>文章内容包括：</p>
-<pre><code><span class="bullet">1. </span>书籍介绍
-<span class="bullet">2. </span>屌丝的现状
-<span class="bullet">3. </span>激情燃烧的岁月-互联网进化
-<span class="bullet">4. </span>屌丝逆袭之路进化为互联网高富帅
-<span class="bullet">5. </span>后记
-<span class="bullet">6. </span>资料推荐
-</code></pre><p>原文：<a href="http://blog.csdn.net/dreajay/article/details/40812623" target="_blank" rel="external">进化：屌丝的互联网逆袭之路</a>。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>这是我在CSDN参加《<a href="http://blog.csdn.net/blogdevteam/article/details/40047403" target="_blank" rel="external">有奖试读&amp;征文——我们在互联网上奋斗的故事</]]>
-    </summary>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
     
-      <category term="职业规划" scheme="http://dreajay.github.io/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/"/>
     
-      <category term="互联网" scheme="http://dreajay.github.io/tags/%E4%BA%92%E8%81%94%E7%BD%91/"/>
     
-      <category term="迷茫" scheme="http://dreajay.github.io/tags/%E8%BF%B7%E8%8C%AB/"/>
     
-      <category term="职业规划" scheme="http://dreajay.github.io/categories/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/"/>
     
-  </entry>
-  
-  <entry>
-    <title><![CDATA[hexo+github搭建博客系统]]></title>
-    <link href="http://dreajay.github.io/2014/11/24/hexo+github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/"/>
-    <id>http://dreajay.github.io/2014/11/24/hexo+github搭建博客系统/</id>
-    <published>2014-11-24T13:02:40.000Z</published>
-    <updated>2014-11-25T11:22:10.000Z</updated>
-    <content type="html"><![CDATA[<p>个人博客大概包含了以下几个模块：首页、文章存档、文章分类、关于、友情链接，有些博客资源丰富，功能强大，还会加上一些诸如站内搜索、评论、分享、微博秀、广告等一些功能，很多框架都可以快速搭建起一个包含以上功能的博客，关于有哪些框架可以搭建博客，可以移步知乎讨论：<a href="http://www.zhihu.com/question/21981094" target="_blank" rel="external">应用github pages创建自己的个人博客</a>。<br><a id="more"></a><br>本博客是用hexo+github搭建的，选择<a href="http://hexo.io/" target="_blank" rel="external">hexo</a>是因为它比较简单，选择<a href="https://github.com" target="_blank" rel="external">github</a>因为它免费，哈哈，免费的东西总是能让人趋之若鹜。本博客的搭建也是参考很多他人资料，会在后面列出，我这里总结一下自己搭建博客各个模块用到的资源。</p>
+  <url>
+    <loc>http://dreajay.github.io/2014/11/24/hexo+github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2014-11-25T11:22:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>hexo+github搭建博客系统</title>
+        <pubTime>2014-11-24T13:02:40.000Z</pubTime>
+        
+        <tag>博客 </tag>
+         
+        <tag>hexo </tag>
+         
+        <tag>github </tag>
+         
+        <tag>markdown </tag>
+         
+         <content><![CDATA[<p>个人博客大概包含了以下几个模块：首页、文章存档、文章分类、关于、友情链接，有些博客资源丰富，功能强大，还会加上一些诸如站内搜索、评论、分享、微博秀、广告等一些功能，很多框架都可以快速搭建起一个包含以上功能的博客，关于有哪些框架可以搭建博客，可以移步知乎讨论：<a href="http://www.zhihu.com/question/21981094" target="_blank" rel="external">应用github pages创建自己的个人博客</a>。<br><a id="more"></a><br>本博客是用hexo+github搭建的，选择<a href="http://hexo.io/" target="_blank" rel="external">hexo</a>是因为它比较简单，选择<a href="https://github.com" target="_blank" rel="external">github</a>因为它免费，哈哈，免费的东西总是能让人趋之若鹜。本博客的搭建也是参考很多他人资料，会在后面列出，我这里总结一下自己搭建博客各个模块用到的资源。</p>
 <h1 id="创建github博客">创建github博客</h1>
 <p>IT人员应该人手必备一个<a href="https://github.com" target="_blank" rel="external">github</a>账号，否则无法跟上这个逼格的年代，先注册一个github账号，然后创建自己的博客GitHub Pages，仓库名字固定结尾github.io，加上你的前缀，比如xxx.github.io。这里不会具体展开，相信你能做到：<a href="http://jingyan.baidu.com/article/ed2a5d1f3732cb09f7be1745.html" target="_blank" rel="external">http://jingyan.baidu.com/article/ed2a5d1f3732cb09f7be1745.html</a>。</p>
 <h1 id="hexo">hexo</h1>
@@ -115,32 +87,73 @@
 <hr>
 <p>[1] <a href="http://cnfeat.com/2014/05/10/2014-05-11-how-to-build-a-blog/" target="_blank" rel="external">如何搭建一个独立博客——简明Github Pages与Hexo教程</a> by cnfeat<br>[2] <a href="http://zipperary.com/categories/hexo/" target="_blank" rel="external">hexo 系列教程</a> by zippera<br>[3] <a href="http://zipperary.com/2013/05/26/ssh-errors-with-github/" target="_blank" rel="external">Git push时重复输入用户名密码的问题</a> by zippera</p>
 ]]></content>
-    <summary type="html">
-    <![CDATA[<p>个人博客大概包含了以下几个模块：首页、文章存档、文章分类、关于、友情链接，有些博客资源丰富，功能强大，还会加上一些诸如站内搜索、评论、分享、微博秀、广告等一些功能，很多框架都可以快速搭建起一个包含以上功能的博客，关于有哪些框架可以搭建博客，可以移步知乎讨论：<a href="http://www.zhihu.com/question/21981094" target="_blank" rel="external">应用github pages创建自己的个人博客</a>。<br>]]>
+         
+         
+           
+             
+              <breadCrumb title="博客" url="http://dreajay.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+          
+             
+              <breadCrumb title="hexo" url="http://dreajay.github.io/categories/%E5%8D%9A%E5%AE%A2/hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
     
-    </summary>
+  <url>
+    <loc>http://dreajay.github.io/2014/11/25/%E8%BF%9B%E5%8C%96%EF%BC%9A%E5%B1%8C%E4%B8%9D%E7%9A%84%E4%BA%92%E8%81%94%E7%BD%91%E9%80%86%E8%A2%AD%E4%B9%8B%E8%B7%AF/</loc>
+    <lastmod>2014-11-25T05:33:33.000Z</lastmod>
+    <data>
+        <display>
+        <title>进化：屌丝的互联网逆袭之路</title>
+        <pubTime>2014-11-25T05:10:13.000Z</pubTime>
+        
+        <tag>职业规划 </tag>
+         
+        <tag>互联网 </tag>
+         
+        <tag>迷茫 </tag>
+         
+         <content><![CDATA[<p>这是我在CSDN参加《<a href="http://blog.csdn.net/blogdevteam/article/details/40047403" target="_blank" rel="external">有奖试读&amp;征文——我们在互联网上奋斗的故事</a>》活动写的一篇读后感，并且获奖。</p>
+<p>文章内容包括：</p>
+<pre><code><span class="bullet">1. </span>书籍介绍
+<span class="bullet">2. </span>屌丝的现状
+<span class="bullet">3. </span>激情燃烧的岁月-互联网进化
+<span class="bullet">4. </span>屌丝逆袭之路进化为互联网高富帅
+<span class="bullet">5. </span>后记
+<span class="bullet">6. </span>资料推荐
+</code></pre><p>原文：<a href="http://blog.csdn.net/dreajay/article/details/40812623" target="_blank" rel="external">进化：屌丝的互联网逆袭之路</a>。</p>
+]]></content>
+         
+         
+           
+             
+              <breadCrumb title="职业规划" url="http://dreajay.github.io/categories/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/"/>
+          
+        </display>
+    </data>
+    </url>
+
     
-      <category term="博客" scheme="http://dreajay.github.io/tags/%E5%8D%9A%E5%AE%A2/"/>
     
-      <category term="hexo" scheme="http://dreajay.github.io/tags/hexo/"/>
     
-      <category term="github" scheme="http://dreajay.github.io/tags/github/"/>
     
-      <category term="markdown" scheme="http://dreajay.github.io/tags/markdown/"/>
-    
-      <category term="博客" scheme="http://dreajay.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
-    
-      <category term="hexo" scheme="http://dreajay.github.io/categories/%E5%8D%9A%E5%AE%A2/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[mybatis实战之构建SqlSessionFactory]]></title>
-    <link href="http://dreajay.github.io/2014/11/21/mybatis%E5%AE%9E%E6%88%98%E4%B9%8BSqlSessionFactory/"/>
-    <id>http://dreajay.github.io/2014/11/21/mybatis实战之SqlSessionFactory/</id>
-    <published>2014-11-21T03:40:57.000Z</published>
-    <updated>2014-11-21T07:46:05.000Z</updated>
-    <content type="html"><![CDATA[<p>SqlSessionFactory是mybatis的重要角色，是mybatis的整个程序的入口.<br><a id="more"></a></p>
+  <url>
+    <loc>http://dreajay.github.io/2014/11/21/mybatis%E5%AE%9E%E6%88%98%E4%B9%8BSqlSessionFactory/</loc>
+    <lastmod>2014-11-21T07:46:05.000Z</lastmod>
+    <data>
+        <display>
+        <title>mybatis实战之构建SqlSessionFactory</title>
+        <pubTime>2014-11-21T03:40:57.000Z</pubTime>
+        
+        <tag>java </tag>
+         
+        <tag>mybatis </tag>
+         
+        <tag>SqlSessionFactory </tag>
+         
+         <content><![CDATA[<p>SqlSessionFactory是mybatis的重要角色，是mybatis的整个程序的入口.<br><a id="more"></a></p>
 <ol>
 <li><p>SqlSessionFactory生命周期<br>SqlSessionFactory生命周期为贯穿整个应用程序,一般保持生命周期都使用同一个实例，所以SqlSessionFactory应该保持全局静态变量或使用单利模式来使用它。如果有多个数据源的时候，需要创建不同的SqlSessionFactory。</p>
 </li>
@@ -150,30 +163,35 @@
 <figure class="highlight Java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="javadoc">/**</span></div><div class="line"> * SqlSessionFactory生命周期为贯穿整个应用程序,一般保持生命周期都使用同一个实例，所以SqlSessionFactory应该保持全局静态变量或使用单利模式来使用它</div><div class="line"> * </div><div class="line"> *<span class="javadoctag"> @author</span> dreajay</div><div class="line"> * </div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SqlSessionFactoryManager</span> </span>{</div><div class="line">    <span class="comment">// SqlSessionFactory一个实例对应一个数据库配置</span></div><div class="line">    <span class="keyword">public</span> SqlSessionFactory sqlSessionFactory;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> SqlSessionFactoryManager INSTANCE = <span class="keyword">new</span> SqlSessionFactoryManager();</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="title">SqlSessionFactoryManager</span>() {</div><div class="line">        sqlSessionFactory = buildSqlSessionFactoryFromXML(<span class="string">"SqlMapConfig.xml"</span>);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> SqlSessionFactory <span class="title">getSqlSessionFactory</span>() {</div><div class="line">        <span class="keyword">return</span> INSTANCE.sqlSessionFactory;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="javadoc">/**</span></div><div class="line">     * 根据配置文件创建SqlSessionFactory</div><div class="line">     * </div><div class="line">     *<span class="javadoctag"> @param</span> SqlMapConfigFile</div><div class="line">     *            SqlMapConfig配置文件，文件应该放在当前的classpath中</div><div class="line">     *<span class="javadoctag"> @return</span> SqlSessionFactory</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> SqlSessionFactory <span class="title">buildSqlSessionFactoryFromXML</span>(String SqlMapConfigFile) {</div><div class="line">        Reader reader = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> {</div><div class="line">            reader = Resources.getResourceAsReader(SqlMapConfigFile);</div><div class="line">            <span class="comment">// SqlSessionFactoryBuilder创建完SqlSessionFactory就不需要了，生命周期在方法内，不需要保存本地变量</span></div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> SqlSessionFactoryBuilder().build(reader);</div><div class="line">        } <span class="keyword">catch</span> (IOException e) {</div><div class="line">            e.printStackTrace();</div><div class="line">            Log4jUtil.error(SqlSessionFactoryManager.class, <span class="string">"创建SqlSessionFactory出错"</span>, e);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        } <span class="keyword">finally</span> {</div><div class="line">            <span class="keyword">if</span> (reader != <span class="keyword">null</span>) {</div><div class="line">                <span class="keyword">try</span> {</div><div class="line">                    reader.close();</div><div class="line">                    reader = <span class="keyword">null</span>;</div><div class="line">                } <span class="keyword">catch</span> (IOException e) {</div><div class="line">                }</div><div class="line">            }</div><div class="line">        }</div><div class="line"></div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="javadoc">/**</span></div><div class="line">     * 手动创建SqlSessionFactory</div><div class="line">     * </div><div class="line">     *<span class="javadoctag"> @return</span> SqlSessionFactory</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> SqlSessionFactory <span class="title">buildSqlSessionFactoryFromJava</span>() {</div><div class="line">        DataSource dataSource = <span class="keyword">null</span>;<span class="comment">// 数据库连接</span></div><div class="line">        <span class="comment">// dataSource = BlogDataSourceFactory.getBlogDataSource();</span></div><div class="line">        TransactionFactory transactionFactory = <span class="keyword">new</span> JdbcTransactionFactory();</div><div class="line">        Environment environment = <span class="keyword">new</span> Environment(<span class="string">"development"</span>, transactionFactory, dataSource);</div><div class="line">        Configuration configuration = <span class="keyword">new</span> Configuration(environment);</div><div class="line">        configuration.addMapper(UserMapper.class);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> SqlSessionFactoryBuilder().build(configuration);</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
 
 ]]></content>
-    <summary type="html">
-    <![CDATA[<p>SqlSessionFactory是mybatis的重要角色，是mybatis的整个程序的入口.<br>]]>
+         
+         
+           
+             
+              <breadCrumb title="java" url="http://dreajay.github.io/categories/java/"/>
+          
+             
+              <breadCrumb title="mybatis" url="http://dreajay.github.io/categories/java/mybatis/"/>
+          
+        </display>
+    </data>
+    </url>
+
     
-    </summary>
-    
-      <category term="java" scheme="http://dreajay.github.io/tags/java/"/>
-    
-      <category term="mybatis" scheme="http://dreajay.github.io/tags/mybatis/"/>
-    
-      <category term="SqlSessionFactory" scheme="http://dreajay.github.io/tags/SqlSessionFactory/"/>
-    
-      <category term="java" scheme="http://dreajay.github.io/categories/java/"/>
-    
-      <category term="mybatis" scheme="http://dreajay.github.io/categories/java/mybatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[设计模式之单例模式]]></title>
-    <link href="http://dreajay.github.io/2014/11/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
-    <id>http://dreajay.github.io/2014/11/19/设计模式之单例模式/</id>
-    <published>2014-11-18T17:49:49.000Z</published>
-    <updated>2014-11-21T01:00:39.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="单例模式">单例模式</h2>
+  <url>
+    <loc>http://dreajay.github.io/2014/11/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2014-11-21T01:00:39.000Z</lastmod>
+    <data>
+        <display>
+        <title>设计模式之单例模式</title>
+        <pubTime>2014-11-18T17:49:49.000Z</pubTime>
+        
+        <tag>设计模式 </tag>
+         
+        <tag>单例模式 </tag>
+         
+        <tag>Singleton模式 </tag>
+         
+         <content><![CDATA[<h2 id="单例模式">单例模式</h2>
 <p>设计模式之单例模式，在很多场景下，我们需要用到单例模式。</p>
 <h3 id="定义">定义</h3>
 <p>Singleton模式是指在应用程序中一个类Class只有一个实例存在。</p>
@@ -199,23 +217,14 @@
 <h3 id="总结">总结</h3>
 <p>推荐使用第一种方法。<br>注意：在分布式式中，程序可能会跨服务器、跨JVM，包含多个类装载器，Singleton可能会被不同的类装载器装载，这样就会导致Singleton失效。</p>
 ]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="单例模式">单例模式</h2>
-<p>设计模式之单例模式，在很多场景下，我们需要用到单例模式。</p>
-<h3 id="定义">定义</h3>
-<p>Singleton模式是指在应用程序中一个类Class只有一个实例存在。</p>
-]]>
-    
-    </summary>
-    
-      <category term="设计模式" scheme="http://dreajay.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-      <category term="单例模式" scheme="http://dreajay.github.io/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
-    
-      <category term="Singleton模式" scheme="http://dreajay.github.io/tags/Singleton%E6%A8%A1%E5%BC%8F/"/>
-    
-      <category term="设计模式" scheme="http://dreajay.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-</feed>
+         
+         
+           
+             
+              <breadCrumb title="设计模式" url="http://dreajay.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+</urlset>
