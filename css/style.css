@@ -111,7 +111,7 @@ a img {
   -webkit-margin-after: 0;
 }
 body {
-  background: #96a1a6;
+  background: #73cbf9;
   font-family: "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", Arial, sans-serif;
   font-size: 100%;
   color: #817c7c;
@@ -1721,7 +1721,7 @@ section.comment {
 }
 footer {
   margin-top: 1em;
-  background: #6f899b;
+  background: #595f62;
   padding: 0 2% 0.5em;
 }
 #footer {
