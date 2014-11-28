@@ -1,6 +1,5 @@
 
-  
-    <!DOCTYPE HTML>
+ <!DOCTYPE HTML>
 <html lang="zh-CN" xmlns:wb="http://open.weibo.com/wb">
 <head>
   <meta charset="UTF-8">
@@ -33,9 +32,9 @@
 
 </head>
 
-      <body>
-        <header>
-          <div>
+    <body>
+      <header>
+        <div>
 		
 			<div id="textlogo">
 				<h1 class="site-name"><a href="/" title="dreajay&#39;s blog">dreajay&#39;s blog</a></h1>
@@ -59,11 +58,7 @@
 					
 					<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="text" id="search" name="wd" autocomplete="off" maxlength="30" placeholder="搜索" />
-                        <input name=tn type=hidden value="bds">
-                        <input name=cl type=hidden value="3">
-                        <input name=ct type=hidden value="2097152">
-						<input type="hidden" name="si" value="dreajay.github.io">
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="30" placeholder="搜索" />
 					</form>
 					
 					</li>
@@ -71,165 +66,75 @@
 			</nav>			
 </div>
 
-        </header>
-        <div id="container">
-          <div id="main" class="page" itemscope itemprop="blogPost">
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/search/index.html" title="搜索" itemprop="url">搜索</a>
-  </h1>
-  <!-- 显示作者
-  <p class="article-author">By
-    
-      <a href="http://dreajay.github.io" title="dreajay">dreajay</a>
-    </p>
-  -->  
-  <p class="article-time">
-    <time datetime="2014-11-22T04:06:56.000Z" itemprop="datePublished">2014-11-22</time>
-    更新日期:<time datetime="2014-11-27T08:24:50.000Z" itemprop="dateModified">2014-11-27</time>
-    
-  </p>
-</header>
-
-	<div class="article-content">
-		
-		
-		<div id="baiduSearch" style="width:100%;height:1000px;padding:0px;margin:0px"><br>    <span id="search_prompt"></span><br>    <iframe id="baidu-search" style="position:absolute;left:0px;width:100%;height:1000px;"><br>    </iframe><br></div>
-
-<script language="JavaScript">
-function createRequestObject() {
-  FORM_DATA = new Object();
-    // The Object ("Array") where our data will be stored.
-  separator = ',';
-    // The token used to separate data from multi-select inputs
-  query = '' +decodeURI( this.location);
-  qu = query
-    // Get the current URL so we can parse out the data.
-    // Adding a null-string '' forces an implicit type cast
-    // from property to string, for NS2 compatibility.
-  query = query.substring((query.indexOf('?')) + 1);
-    // Keep everything after the question mark '?'.
-  if (query.length < 1) { return false; }  // Perhaps we got some bad data?
-  keypairs = new Object();
-  numKP = 1;
-    // Local vars used to store and keep track of name/value pairs
-    // as we parse them back into a usable form.
-  while (query.indexOf('&') > -1) {
-    keypairs[numKP] = query.substring(0,query.indexOf('&'));
-    query = query.substring((query.indexOf('&')) + 1);
-    numKP++;
-      // Split the query string at each '&', storing the left-hand side
-      // of the split in a new keypairs[] holder, and chopping the query
-      // so that it gets the value of the right-hand string.
-  }
-  keypairs[numKP] = query;
-    // Store what's left in the query string as the final keypairs[] data.<
-  for (i in keypairs) {
-    keyName = keypairs[i].substring(0,keypairs[i].indexOf('='));
-      // Left of '=' is name.
-    keyValue = keypairs[i].substring((keypairs[i].indexOf('=')) + 1);
-      // Right of '=' is value.
-    while (keyValue.indexOf('+') > -1) {
-      keyValue = keyValue.substring(0,keyValue.indexOf('+')) + ' ' + keyValue.substring(keyValue.indexOf('+') + 1);
-        // Replace each '+' in data string with a space.
-    }
-    keyValue = unescape(keyValue);
-      // Unescape non-alphanumerics
-    if (FORM_DATA[keyName]) {
-      FORM_DATA[keyName] = FORM_DATA[keyName] + separator + keyValue;
-        // Object already exists, it is probably a multi-select input,
-        // and we need to generate a separator-delimited string
-        // by appending to what we already have stored.
-    } else {
-      FORM_DATA[keyName] = keyValue;
-        // Normal case: name gets value.
-    }
-  }
-  return FORM_DATA;
-}
-FORM_DATA = createRequestObject();
-  // This is the array/object containing the GET data.
-  // Retrieve information with 'FORM_DATA [ key ] = value'.
-var q_str=FORM_DATA['wd'];
-if (q_str){
-document.getElementById('search_prompt').innerHTML = '正在加载……';   
-document.getElementById('baidu-search').src='http://zhannei.baidu.com/cse/search?q='+q_str+'&entry=1&s=17834434419516021878';
-document.getElementById('baidu-search').onload=function(){document.getElementById('search_prompt').innerHTML = '';};
-}else{
-document.getElementById('search_prompt').innerHTML = '请在上方搜索框中输入搜索内容，示例：<a href="/search/?q=blog">blog</a>。';
-}
-</script>  
-	</div>
-		<footer class="article-footer clearfix">
-<div class="article-share" id="share">
-
-  
-<!-- JiaThis Button BEGIN -->
-<div class="jiathis_style">
-    <span class="jiathis_txt">分享到：</span>
-    <a class="jiathis_button_qzone"></a>
-    <a class="jiathis_button_tsina"></a>
-    <a class="jiathis_button_tqq"></a>
-    <a class="jiathis_button_weixin"></a>
-    <a class="jiathis_button_renren"></a>
-    <a href="http://www.jiathis.com/share?uid=1987046" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-    <a class="jiathis_counter_style"></a>
-</div>
-<script type="text/javascript">
-var jiathis_config = {data_track_clickback:'true'};
-</script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1987046" charset="utf-8"></script>
-<!-- JiaThis Button END -->
-
-
-
-</div>
-
-
-
-</footer>   	       
-	</article>
-	
-	<!-- 多说-->
-
-<section class="comment">
-<div class="ds-thread" data-thread-key="page-搜索" data-title="搜索" data-url="http://dreajay.github.io/search/index.html"></div>
-</section>
-<!-- disqus-->
-
-
+      </header>
+          
+<div id="searchdiv">
+    <img id="loadgif" src="/img/load.gif" style="position:absolute;left: 45%;top:50%;display:none;">
+    <p id="search_prompt" style="position:absolute;left:45%;top:50%;display:none;"></p>
+    <div>
+        <iframe id="baidu-search" name="baidu-search" marginheight="0px" marginwidth="0px" width="100%" height="1000px" frameborder="0" scrolling="no" ></iframe>
+    </div>
 </div>  
-        </div>
-        <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<div class="social-font" class="clearfix">
-		
-		<a href="http://weibo.com/2583230784" target="_blank" title="weibo"></a>
-		
-		
-		<a href="https://twitter.com/idreajay" target="_blank" title="twitter"></a>
-		
-		
-		<a href="https://github.com/dreajay" target="_blank" title="github"></a>
-		
-		
-	</div>
-		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="pacman">pacman</a> © 2014 
-		
-		<a href="http://dreajay.github.io" target="_blank" title="dreajay">dreajay</a>
-		
-		</p>
-</div>
-</footer>
-        <script src="/js/jquery-2.1.0.min.js"></script>
+
+<script src="/js/jquery-2.1.0.min.js"></script>
+<script language="JavaScript">
+
+    function createRequestObject() {
+        FORM_DATA = new Object();
+        separator = ',';
+        query = '' +decodeURI( this.location);
+        qu = query
+        query = query.substring((query.indexOf('?')) + 1);
+        // Keep everything after the question mark '?'.
+        if (query.length < 1) { return false; }  // Perhaps we got some bad data?
+        keypairs = new Object();
+        numKP = 1;
+        // Local vars used to store and keep track of name/value pairs
+        // as we parse them back into a usable form.
+        while (query.indexOf('&') > -1) {
+        keypairs[numKP] = query.substring(0,query.indexOf('&'));
+        query = query.substring((query.indexOf('&')) + 1);
+        numKP++;
+        }
+        keypairs[numKP] = query;
+        for (i in keypairs) {
+        keyName = keypairs[i].substring(0,keypairs[i].indexOf('='));
+        keyValue = keypairs[i].substring((keypairs[i].indexOf('=')) + 1);
+        while (keyValue.indexOf('+') > -1) {
+        keyValue = keyValue.substring(0,keyValue.indexOf('+')) + ' ' + keyValue.substring(keyValue.indexOf('+') + 1);
+        }
+        keyValue = unescape(keyValue);
+        if (FORM_DATA[keyName]) {
+        FORM_DATA[keyName] = FORM_DATA[keyName] + separator + keyValue;
+        } else {
+        FORM_DATA[keyName] = keyValue;
+        }
+        }
+        return FORM_DATA;
+    }
+
+    $("body").css("background","#FFFFFF");
+    FORM_DATA = createRequestObject();
+    var q=FORM_DATA['q'];
+    if (q){
+        $("#search_prompt").css("display","none");
+        $("#loadgif").css("display","inline");
+        var search = $("#baidu-search");
+        //820421516555549197
+        var zhanneiid = '17834434419516021878';
+        search.attr("src",'http://zhannei.baidu.com/cse/search?entry=1&s='+zhanneiid+'&q='+q);
+        search.load(function() {
+            $("#loadgif").css("display","none");
+        });
+    }else{
+        $("#loadgif").css("display","none");
+        $("#search_prompt").css("display","block");
+        $("#search_prompt").html('请使用上方搜索框，示例：<a href="search.html?q=blog">blog</a>。');
+    }
+
+</script>
+
+      <script src="/js/jquery-2.1.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){ 
   $('.navbar').click(function(){
@@ -277,18 +182,6 @@ $(document).ready(function(){
 
 
 
-<script type="text/javascript">
-  var duoshuoQuery = {short_name:"dreajaygithubblog"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script> 
-
 
 
 
@@ -334,7 +227,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </script>
 
 
-      </body>
-     </html>
-     
+    </body>
+   </html>   
 
