@@ -9,10 +9,8 @@
     
     <meta name="author" content="dreajay">
     
-    <meta name="description" content="单例模式
-设计模式之单例模式，在很多场景下，我们需要用到单例模式。
-定义
-Singleton模式是指在应用程序中一个类Class只有一个实例存在。">
+    <meta name="description" content="定义
+Singleton是指在应用程序中只被实例化一次的类。">
     
     
     
@@ -86,7 +84,7 @@ Singleton模式是指在应用程序中一个类Class只有一个实例存在。
   -->  
   <p class="article-time">
     <time datetime="2014-11-18T17:49:49.000Z" itemprop="datePublished">2014-11-19</time>
-    更新日期:<time datetime="2014-11-21T01:00:39.000Z" itemprop="dateModified">2014-11-21</time>
+    更新日期:<time datetime="2014-11-28T13:04:57.000Z" itemprop="dateModified">2014-11-28</time>
     
   </p>
 </header>
@@ -96,34 +94,44 @@ Singleton模式是指在应用程序中一个类Class只有一个实例存在。
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#单例模式"><span class="toc-number">1.</span> <span class="toc-text">单例模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建单例模式的方法"><span class="toc-number">1.2.</span> <span class="toc-text">创建单例模式的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#第一种"><span class="toc-number">1.2.1.</span> <span class="toc-text">第一种</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第二种"><span class="toc-number">1.2.2.</span> <span class="toc-text">第二种</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第三种"><span class="toc-number">1.2.3.</span> <span class="toc-text">第三种</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第四种"><span class="toc-number">1.2.4.</span> <span class="toc-text">第四种</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">1.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#定义"><span class="toc-number">1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建单例模式的方法"><span class="toc-number">2.</span> <span class="toc-text">创建单例模式的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一种"><span class="toc-number">2.1.</span> <span class="toc-text">第一种</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二种"><span class="toc-number">2.2.</span> <span class="toc-text">第二种</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三种"><span class="toc-number">2.3.</span> <span class="toc-text">第三种</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第四种"><span class="toc-number">2.4.</span> <span class="toc-text">第四种</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第五种"><span class="toc-number">2.5.</span> <span class="toc-text">第五种</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第六种"><span class="toc-number">2.6.</span> <span class="toc-text">第六种</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
 		</div>
 		
-		<h2 id="单例模式">单例模式</h2>
-<p>设计模式之单例模式，在很多场景下，我们需要用到单例模式。</p>
-<h3 id="定义">定义</h3>
-<p>Singleton模式是指在应用程序中一个类Class只有一个实例存在。</p>
+		<h2 id="定义">定义</h2>
+<p>Singleton是指在应用程序中只被实例化一次的类。</p>
 <a id="more"></a>
 
-<h3 id="创建单例模式的方法">创建单例模式的方法</h3>
-<h4 id="第一种">第一种</h4>
-<p>在程序运行时就创建静态Singleton实例，这样会导致即使不使用，内存中也会存在。</p>
-<figure class="highlight Java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">class Singleton {</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton singleton = <span class="keyword">new</span> Singleton();</div><div class="line">    <span class="comment">//私有构造器</span></div><div class="line">    <span class="keyword">private</span> <span class="title">Singleton</span>() {   </div><div class="line">    }</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span>() {</div><div class="line">        <span class="keyword">return</span> singleton;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h2 id="创建单例模式的方法">创建单例模式的方法</h2>
+<h3 id="第一种">第一种</h3>
+<p>恶汉式，程序加载自己时就会创建静态Singleton实例。</p>
+<figure class="highlight Java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//通过静态final变量获取Singleton</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>{</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton singleton = <span class="keyword">new</span> Singleton();</div><div class="line">    <span class="comment">//私有构造器</span></div><div class="line">    <span class="keyword">private</span> <span class="title">Singleton</span>() {   </div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
 
-<h4 id="第二种">第二种</h4>
-<p>当需要使用的时候再进行创建，使用synchronized锁保证只能生成一个实例，但synchronized会导致性能问题。</p>
-<figure class="highlight Java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class Singleton {</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton = <span class="keyword">null</span>;</div><div class="line">    <span class="comment">//私有构造器</span></div><div class="line">    <span class="keyword">private</span> <span class="title">Singleton</span>() {   </div><div class="line">    }</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">getInstance</span>() {</div><div class="line">        <span class="keyword">if</span>(singleton == <span class="keyword">null</span>) {</div><div class="line">            sinleton = <span class="keyword">new</span> Singleton();</div><div class="line">        }</div><div class="line">        <span class="keyword">return</span> sinleton;</div><div class="line">    } </div><div class="line">}</div></pre></td></tr></table></figure>
 
-<h4 id="第三种">第三种</h4>
-<p>下面这种方法是上面方法的改进，但可能造成创建多个实例问题，假如第一次在创建对象的时候，另外一个线程已经进入if(singleton == null) 中等待synchronized，最后执行完就会产生两个Singleton，导致单例失效。</p>
-<figure class="highlight Java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class Singleton {</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton = <span class="keyword">null</span>;</div><div class="line">    <span class="comment">//私有构造器</span></div><div class="line">    <span class="keyword">private</span> <span class="title">Singleton</span>() {   </div><div class="line">    }</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span>() {</div><div class="line">        <span class="keyword">if</span>(singleton == <span class="keyword">null</span>) {</div><div class="line">            <span class="keyword">synchronized</span>(Singleton.class) {</div><div class="line">                sinleton = <span class="keyword">new</span> Singleton();</div><div class="line">            }</div><div class="line">        }</div><div class="line">        <span class="keyword">return</span> sinleton;</div><div class="line">    } </div><div class="line">}</div></pre></td></tr></table></figure>
 
-<h4 id="第四种">第四种</h4>
+<figure class="highlight Java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//通过静态方法获取实例</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>{</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton singleton = <span class="keyword">new</span> Singleton();</div><div class="line">    <span class="comment">//私有构造器</span></div><div class="line">    <span class="keyword">private</span> <span class="title">Singleton</span>() {   </div><div class="line">    }</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span>() {</div><div class="line">        <span class="keyword">return</span> singleton;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h3 id="第二种">第二种</h3>
+<p>懒汉式，当需要使用的时候再进行创建，使用synchronized锁保证只能生成一个实例，否则多线程下可能会产生多个实例，但synchronized会导致性能下降。</p>
+<figure class="highlight Java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>{</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton = <span class="keyword">null</span>;</div><div class="line">    <span class="comment">//私有构造器</span></div><div class="line">    <span class="keyword">private</span> <span class="title">Singleton</span>() {   </div><div class="line">    }</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">getInstance</span>() {</div><div class="line">        <span class="keyword">if</span>(singleton == <span class="keyword">null</span>) {</div><div class="line">            sinleton = <span class="keyword">new</span> Singleton();</div><div class="line">        }</div><div class="line">        <span class="keyword">return</span> sinleton;</div><div class="line">    } </div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h3 id="第三种">第三种</h3>
+<p>懒汉式，下面这种方法是上面方法的改进，但多线程下可能造成创建多个实例问题，假如第一次在创建对象的时候，另外一个线程已经进入if(singleton == null) 中等待synchronized，最后执行完就会产生两个Singleton，导致单例失效。</p>
+<figure class="highlight Java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>{</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton = <span class="keyword">null</span>;</div><div class="line">    <span class="comment">//私有构造器</span></div><div class="line">    <span class="keyword">private</span> <span class="title">Singleton</span>() {   </div><div class="line">    }</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span>() {</div><div class="line">        <span class="keyword">if</span>(singleton == <span class="keyword">null</span>) {</div><div class="line">            <span class="keyword">synchronized</span>(Singleton.class) {</div><div class="line">                sinleton = <span class="keyword">new</span> Singleton();</div><div class="line">            }</div><div class="line">        }</div><div class="line">        <span class="keyword">return</span> sinleton;</div><div class="line">    } </div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h3 id="第四种">第四种</h3>
 <p>这个方法避免了第三种创建多个实例对象的问题，并且避免了多个线程排队等候的现象。</p>
-<figure class="highlight Java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">class Singleton {</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton = <span class="keyword">null</span>;</div><div class="line">    <span class="comment">//私有构造器</span></div><div class="line">    <span class="keyword">private</span> <span class="title">Singleton</span>() {   </div><div class="line">    }</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">getInstance</span>() {</div><div class="line">        <span class="keyword">if</span>(singleton == <span class="keyword">null</span>) {</div><div class="line">            <span class="keyword">synchronized</span>(Singleton.class){</div><div class="line">                <span class="keyword">if</span>(singleton == <span class="keyword">null</span>) {</div><div class="line">                    sinleton = <span class="keyword">new</span> Singleton();</div><div class="line">                }</div><div class="line">            }</div><div class="line">        }</div><div class="line">        <span class="keyword">return</span> sinleton;</div><div class="line">    } </div><div class="line">}</div></pre></td></tr></table></figure>
+<figure class="highlight Java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>{</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton = <span class="keyword">null</span>;</div><div class="line">    <span class="comment">//私有构造器</span></div><div class="line">    <span class="keyword">private</span> <span class="title">Singleton</span>() {   </div><div class="line">    }</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">getInstance</span>() {</div><div class="line">        <span class="keyword">if</span>(singleton == <span class="keyword">null</span>) {</div><div class="line">            <span class="keyword">synchronized</span>(Singleton.class){</div><div class="line">                <span class="keyword">if</span>(singleton == <span class="keyword">null</span>) {</div><div class="line">                    sinleton = <span class="keyword">new</span> Singleton();</div><div class="line">                }</div><div class="line">            }</div><div class="line">        }</div><div class="line">        <span class="keyword">return</span> sinleton;</div><div class="line">    } </div><div class="line">}</div></pre></td></tr></table></figure>
 
-<h3 id="总结">总结</h3>
-<p>推荐使用第一种方法。<br>注意：在分布式式中，程序可能会跨服务器、跨JVM，包含多个类装载器，Singleton可能会被不同的类装载器装载，这样就会导致Singleton失效。</p>
+<h3 id="第五种">第五种</h3>
+<p>改良的懒汉模式，通过私有静态final内部类间接构造Singleton。</p>
+<figure class="highlight Java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>{  </div><div class="line">    <span class="keyword">private</span> <span class="title">Singleton</span>() {}  </div><div class="line">    <span class="comment">//私有静态</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Holder</span> </span>{  </div><div class="line">        <span class="comment">//static final Singleton</span></div><div class="line">        <span class="keyword">static</span> <span class="keyword">final</span> Singleton instance = <span class="keyword">new</span> Singleton();  </div><div class="line">    }  </div><div class="line">  </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span>() {  </div><div class="line">        <span class="keyword">return</span> Holder.instance;  </div><div class="line">    }  </div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h3 id="第六种">第六种</h3>
+<p>枚举实现单例模式，在《effective java》一书中有介绍，这是实现单例的最佳方式。之前第一种方法第一个例子通过静态final变量获取Singleton，通过反射调用私有构造器可以创建另一个实例，会导致破坏Singleton，防御方法为是在构造器中进行判断第二次创建时抛出异常；另外一方面为了给Singleton序列化(Serializable)，仅仅在声明中加上“implements Serializable ”，是不够的，为了保证Singleton，必须声明所有实例域都是瞬时的（transient），并提供一个readResolve方法，否则每次反序列化时都会创建一个新的实例，使用枚举方法简洁并无偿的提供了序列化机制，绝对防止多次实例化，即使在面对复杂的序列化或者反射攻击的时候。</p>
+<figure class="highlight Java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Singleton {</div><div class="line">    INSTANCE {</div><div class="line">        <span class="comment">// init . . .</span></div><div class="line">    };</div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">someMethod</span>() {</div><div class="line">        <span class="comment">// do . . .</span></div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h2 id="总结">总结</h2>
+<p>枚举创建单例这么多好处，以后应该多用枚举方式来实现单例模式；当Singleton不需要序列化，或一般不会被反射时，我一般使用第一种恶汉式来创建，简单，也不需要考虑多线程，虽然一开始就需要消耗内存去创建，但现在的机器是不用太担心的，恶汉式会让单例变得更加复杂。<br><strong><em>注意：</em></strong><br>在分布式式中，程序可能会跨服务器、跨JVM，包含多个类装载器，Singleton可能会被不同的类装载器装载，这样就会导致Singleton失效。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -204,7 +212,7 @@ var jiathis_config = {data_track_clickback:'true'};
 		
 			<li><a href="/categories/博客/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 		
-			<li><a href="/categories/java/" title="java">java<sup>1</sup></a></li>
+			<li><a href="/categories/java/" title="java">java<sup>2</sup></a></li>
 		
 			<li><a href="/categories/java/mybatis/" title="mybatis">mybatis<sup>1</sup></a></li>
 		
@@ -213,6 +221,8 @@ var jiathis_config = {data_track_clickback:'true'};
 			<li><a href="/categories/职业规划/" title="职业规划">职业规划<sup>1</sup></a></li>
 		
 			<li><a href="/categories/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
+		
+			<li><a href="/categories/java/读书笔记/" title="读书笔记">读书笔记<sup>1</sup></a></li>
 		
 		</ul>
 </div>
@@ -226,6 +236,8 @@ var jiathis_config = {data_track_clickback:'true'};
 			<li><a href="/tags/Singleton模式/" title="Singleton模式">Singleton模式<sup>1</sup></a></li>
 		
 			<li><a href="/tags/SqlSessionFactory/" title="SqlSessionFactory">SqlSessionFactory<sup>1</sup></a></li>
+		
+			<li><a href="/tags/effective-java/" title="effective java">effective java<sup>1</sup></a></li>
 		
 			<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
 		
@@ -246,6 +258,8 @@ var jiathis_config = {data_track_clickback:'true'};
 			<li><a href="/tags/职业规划/" title="职业规划">职业规划<sup>1</sup></a></li>
 		
 			<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
+		
+			<li><a href="/tags/读书笔记/" title="读书笔记">读书笔记<sup>1</sup></a></li>
 		
 			<li><a href="/tags/迷茫/" title="迷茫">迷茫<sup>1</sup></a></li>
 		

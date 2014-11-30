@@ -1,0 +1,482 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN" xmlns:wb="http://open.weibo.com/wb">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>effective java-读书笔记-第三章 对于所有对象都通用的方法 | dreajay&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="dreajay">
+    
+    <meta name="description" content="第三章 对于所有对象都通用的方法
+所有非final方法（equals、hashCode、toString、clone、finalize）都有明确的通用约定，因为它们被设计成是要被覆盖的，如果不遵守，基于散列的集合（HashMap、HashSet、HashTable）可能无法结合该类一起运作。
+第8条">
+    
+    
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="idreajay" />
+    <meta name="twitter:title" content="effective java-读书笔记-第三章 对于所有对象都通用的方法 | dreajay&#39;s blog" />
+      
+    
+    
+    <link rel="alternate" href="atom.xml" title="dreajay&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="dreajay&#39;s blog">dreajay&#39;s blog</a></h1>
+				<h2 class="blog-motto">戴竣杰的博客专栏，坚持做一件事，一定会成功！</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+						<li><a href="/atom.xml">RSS订阅</a></li>
+					
+					<li>
+					
+					<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="30" placeholder="搜索" />
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/11/30/effective java-读书笔记-第三章 对于所有对象都通用的方法/" title="effective java-读书笔记-第三章 对于所有对象都通用的方法" itemprop="url">effective java-读书笔记-第三章 对于所有对象都通用的方法</a>
+  </h1>
+  <!-- 显示作者
+  <p class="article-author">By
+    
+      <a href="http://dreajay.github.io" title="dreajay">dreajay</a>
+    </p>
+  -->  
+  <p class="article-time">
+    <time datetime="2014-11-30T14:57:04.000Z" itemprop="datePublished">2014-11-30</time>
+    更新日期:<time datetime="2014-11-30T15:02:53.000Z" itemprop="dateModified">2014-11-30</time>
+    
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第三章_对于所有对象都通用的方法"><span class="toc-number">1.</span> <span class="toc-text">第三章 对于所有对象都通用的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#第8条_覆盖equals时请遵守通用约定"><span class="toc-number">1.1.</span> <span class="toc-text">第8条 覆盖equals时请遵守通用约定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第9条_覆盖equals时总要覆盖hashCode"><span class="toc-number">1.2.</span> <span class="toc-text">第9条 覆盖equals时总要覆盖hashCode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第10条_始终要覆盖toString"><span class="toc-number">1.3.</span> <span class="toc-text">第10条 始终要覆盖toString</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第11条_谨慎地覆盖clone"><span class="toc-number">1.4.</span> <span class="toc-text">第11条 谨慎地覆盖clone</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第12条_考虑实现Comparable接口"><span class="toc-number">1.5.</span> <span class="toc-text">第12条 考虑实现Comparable接口</span></a></li></ol></li></ol>
+		</div>
+		
+		<h1 id="第三章_对于所有对象都通用的方法">第三章 对于所有对象都通用的方法</h1>
+<p>所有非final方法（equals、hashCode、toString、clone、finalize）都有明确的通用约定，因为它们被设计成是要被覆盖的，如果不遵守，基于散列的集合（HashMap、HashSet、HashTable）可能无法结合该类一起运作。</p>
+<h2 id="第8条_覆盖equals时请遵守通用约定">第8条 覆盖equals时请遵守通用约定</h2>
+<p><strong>覆盖equals规范：</strong></p>
+<ol>
+<li>自反性（reflexive）。对于任何非null的引用值x，x.equals(x)必须返回true。</li>
+<li>对称性（symmetric）。对于任何非null的引用值x和y，当且仅当y.equals(x)返回true时，x.equals(y)必须返回true。</li>
+<li>传递性（transitive）。对于任何非null的引用值x、y和z，如果x.equals(y)返回true，并且y.equals(z)也返回true，那么x.equals(z)必须返回true。</li>
+<li>一致性（consistent）。对于任何非null的引用值x和y，只有equals的比较操作在对象中所用的信息没有被修改，多次调用x.equals(y)就会一致的返回true或者false。</li>
+</ol>
+<p><strong>实现equals方法：</strong></p>
+<ol>
+<li>使用==操作符检查“参数是否为这个对象的引用”。如果是，返回true。</li>
+<li>使用instanceof操作符检查”参数是否为正确的类型”。如果不是返回false。</li>
+<li>把参数转换成正确的类型。转换之前用instanceof判断，确保正确。</li>
+<li>对于该类中的每个”关键“字段，检查参数中的字段是否与该对象中对应的字段相匹配。如果这些测试检查成功，返回true，否则返回false。</li>
+<li>当编写完equals方法，编写单元测试校验它是否是对称的、传递的、一致的。</li>
+</ol>
+<p><strong>注意：</strong></p>
+<ol>
+<li>覆盖equals方法时总要覆盖hashCode方法。</li>
+<li>不要企图让equals方法过于智能。比如File不应该和文件链接当作相等来看待。</li>
+<li>不要将equals方法声明中的Object对象替换为其他类型。</li>
+</ol>
+<h2 id="第9条_覆盖equals时总要覆盖hashCode">第9条 覆盖equals时总要覆盖hashCode</h2>
+<p>hashcode方法返回该对象的哈希码值。通常有必要重写 hashCode 方法，以维护 hashCode 方法的常规协定，该协定声明相等对象必须具有相等的哈希码。</p>
+<p><strong>hashCode常规协定</strong></p>
+<ol>
+<li>在应用程序执行期间，只要对象的equals方法的比较操作中所用的信息没有被修改，那么对这同一对象多次调用，hashCode方法都必须一致地返回同样的整数。从某一应用程序的一次执行到同一应用程序的另一次执行，该整数无需保持一致。 </li>
+<li>如果两个对象根据equals(Object)方法比较是相等的，那么调用两个对象中的任意一个对象上hashCode 方法都必须产生相同的整数结果。 </li>
+<li>如果两个对象根据equals(Object)方法比较是不相等的，那么调用两个对象中的任意一个对象上hashCode 方法，则不一定产生不同的整数结果。但是，程序员应该知道，为不相等的对象生成不同整数结果可以提高哈希表的性能。 </li>
+</ol>
+<p><em>对于equals()相等的两个对象，其hashCode()返回的值一定相等</em></p>
+<p><strong>重写hashCode方法</strong></p>
+<ol>
+<li>保证equals相等的对象hash码要一定相等</li>
+<li>对于equals不同的对象要尽量做到hash码不同<br>具体步骤就是：<br>[1]把某个非零常数值（一般取素数），例如17，保存在int变量result中；<br>[2]对于对象中每一个关键域f（指equals方法中考虑的每一个域）：<br>[2.1]boolean型，计算(f ? 0 : 1);<br>[2.2]byte、char、short、int型，计算(int)f;<br>[2.3]long型，计算(int) (f ^ (f&gt;&gt;&gt;32));<br>[2.4]float型，计算Float.floatToIntBits(afloat);<br>[2.5]double型，计算Double.doubleToLongBits(adouble)得到一个long，再执行[2.3];<br>[2.6]对象引用，递归调用它的hashCode方法;<br>[2.7]数组域，对其中每个元素调用它的hashCode方法。<br>[3]将上面计算得到的散列码保存到int变量c，然后执行 result=37<em>result+c;<br>[4]返回result。<br>其实其思路就是：先取一个基数，然后对于equals()中考虑的每一个域，先转换成整数，再执行result=37</em>result+c;例如：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span>(){</div><div class="line">    <span class="keyword">int</span> result = <span class="number">17</span>;</div><div class="line">    result = <span class="number">31</span>*result+age;</div><div class="line">    result=<span class="number">31</span>*result+name.hashCode();</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h2 id="第10条_始终要覆盖toString">第10条 始终要覆盖toString</h2>
+<p>toString通用约定指出被返回的字符串应该是简洁的、但信息丰富，并且易于阅读的表达形式。提供好的toString方法可以使类用起来更加舒适，当对象被传递给println、pringtf、字符串联合操作+、日志打印，toString会被自动调用。</p>
+<p><em>建议所有的子类都覆盖toString方法。</em></p>
+<h2 id="第11条_谨慎地覆盖clone">第11条 谨慎地覆盖clone</h2>
+<p>Cloneable接口表明这样的对象允许克隆，它没有包含任何方法，它改变了超类中受保护的方法clone的行为，如果一个类实现了Cloneable接口，Object的clone方法就返回该对象的逐层拷贝，否则就会抛出CloneNotSupportException异常。</p>
+<p>覆盖clone方法要非常小心，如果类里面含有复杂数据类型，要进行深度复制，如果类里面有final属性，则无法进行clone，因为final属性在clone时无法再进行赋值。</p>
+<p><em>建议对象不使用clone方法，而使用静态拷贝工厂或拷贝构造器替代clone方法</em></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="title">Obj</span>(Obj obj);</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> Obj <span class="title">newInstance</span>(Obj obj);</div></pre></td></tr></table></figure>
+
+<h2 id="第12条_考虑实现Comparable接口">第12条 考虑实现Comparable接口</h2>
+<p>Comparable接口表明它的实例具有内在排序关系。</p>
+<p><strong>Comparable声明：</strong></p>
+<ol>
+<li>如果第一个对象小于第二个对象，则第二个对象一定大于第一个对象；如果第一个对象等于第二个对象，则第二个对象一定等于第一个对象；如果第一个对象大于第二个对象，则第二个对象一定小于第一个对象。</li>
+<li>如果第一个对象大于第二个对象，并且第二个对象又大于第三个对象，那么第一个对象一定大于第三个对象。</li>
+<li>在比较时被认为相等的所有对象，它们跟别的对象做比较时一定会产生同样的结果。</li>
+</ol>
+<p>Comparable的声明和equals的声明类似，也遵守自反性、对称性和传递性。</p>
+<p><em>强烈建议( (x.compareTo(y)==0)==(x.eauals(y) )，但这并非绝对必要。</em></p>
+<p><strong>Comparable实现</strong></p>
+<p>compareTo方法中的域的比较时顺序的比较，而不是等同性的比较。笔记对象引用域可以使通过递归地调用compareTo方法来实现。如果一个域没有实现Comparable接口，或者你需要一个非标准的排序关系，就可以使用一个显示的Comparator接口来代替。</p>
+<figure class="highlight 例子"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span>(PhoneNumber pn) {</div><div class="line">        <span class="keyword">int</span> areaCodeDiff = areaCode - pn.areaCode;</div><div class="line">        <span class="keyword">if</span> (areaCodeDiff != <span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span> areaCodeDiff;</div><div class="line">        <span class="keyword">int</span> prefixDiff = prefix - pn.prefix;</div><div class="line">        <span class="keyword">if</span> (prefixDiff != <span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span> prefixDiff;</div><div class="line">        <span class="comment">// 下面可能会发生超出int最大值异常</span></div><div class="line">        <span class="keyword">return</span> lineNumber - pn.lineNumber;</div><div class="line">    }</div></pre></td></tr></table></figure>
+
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-share" id="share">
+
+  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+    <span class="jiathis_txt">分享到：</span>
+    <a class="jiathis_button_qzone"></a>
+    <a class="jiathis_button_tsina"></a>
+    <a class="jiathis_button_tqq"></a>
+    <a class="jiathis_button_weixin"></a>
+    <a class="jiathis_button_renren"></a>
+    <a href="http://www.jiathis.com/share?uid=1987046" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+    <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1987046" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+</div>
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/java/">java</a>►<a class="article-category-link" href="/categories/java/读书笔记/">读书笔记</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/effective-java/">effective java</a><a href="/tags/读书笔记/">读书笔记</a>
+  </div>
+
+
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2014/11/25/进化：屌丝的互联网逆袭之路/"  title="进化：屌丝的互联网逆袭之路">
+ <strong>下一篇:</strong><br/> 
+ <span>进化：屌丝的互联网逆袭之路
+</span>
+</a>
+</div>
+
+</nav>
+
+	<!-- 多说-->
+
+<section class="comment">
+<div class="ds-thread" data-thread-key="post-effective java-读书笔记-第三章 对于所有对象都通用的方法" data-title="effective java-读书笔记-第三章 对于所有对象都通用的方法" data-url="http://dreajay.github.io/2014/11/30/effective java-读书笔记-第三章 对于所有对象都通用的方法/"></div>
+</section>
+<!-- disqus-->
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  <p class="asidetitle">关注</p>
+<iframe width="100%" height="120" class="share_self" marginheight="5px" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=120&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=2583230784&verifier=1d07a1a0&dpc=1"></iframe>
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/博客/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		
+			<li><a href="/categories/java/" title="java">java<sup>2</sup></a></li>
+		
+			<li><a href="/categories/java/mybatis/" title="mybatis">mybatis<sup>1</sup></a></li>
+		
+			<li><a href="/categories/博客/" title="博客">博客<sup>1</sup></a></li>
+		
+			<li><a href="/categories/职业规划/" title="职业规划">职业规划<sup>1</sup></a></li>
+		
+			<li><a href="/categories/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
+		
+			<li><a href="/categories/java/读书笔记/" title="读书笔记">读书笔记<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/Singleton模式/" title="Singleton模式">Singleton模式<sup>1</sup></a></li>
+		
+			<li><a href="/tags/SqlSessionFactory/" title="SqlSessionFactory">SqlSessionFactory<sup>1</sup></a></li>
+		
+			<li><a href="/tags/effective-java/" title="effective java">effective java<sup>1</sup></a></li>
+		
+			<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+		
+			<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		
+			<li><a href="/tags/java/" title="java">java<sup>1</sup></a></li>
+		
+			<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+		
+			<li><a href="/tags/mybatis/" title="mybatis">mybatis<sup>1</sup></a></li>
+		
+			<li><a href="/tags/互联网/" title="互联网">互联网<sup>1</sup></a></li>
+		
+			<li><a href="/tags/单例模式/" title="单例模式">单例模式<sup>1</sup></a></li>
+		
+			<li><a href="/tags/博客/" title="博客">博客<sup>1</sup></a></li>
+		
+			<li><a href="/tags/职业规划/" title="职业规划">职业规划<sup>1</sup></a></li>
+		
+			<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
+		
+			<li><a href="/tags/读书笔记/" title="读书笔记">读书笔记<sup>1</sup></a></li>
+		
+			<li><a href="/tags/迷茫/" title="迷茫">迷茫<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://blog.csdn.net/dreajay" target="_blank" title="dreajay csdn">CSDN</a></li>
+      <li><a href="https://github.com/dreajay" target="_blank" title="dreajay github">github</a></li>
+      <li><a href="http://www.douban.com/people/72514701/" target="_blank" title="dreajay豆瓣">豆瓣</a></li>
+    </ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<section class="info">
+		<p> 没有礁石，就没有美丽的浪花；没有挫折，就没有壮丽的人生！ <br/>
+			再长的路，一步步也能走完，再短的路，不迈开双脚也无法到达，平凡的脚步也可以走完伟大的行程！</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2583230784" target="_blank" title="weibo"></a>
+		
+		
+		<a href="https://twitter.com/idreajay" target="_blank" title="twitter"></a>
+		
+		
+		<a href="https://github.com/dreajay" target="_blank" title="github"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="pacman">pacman</a> © 2014 
+		
+		<a href="http://dreajay.github.io" target="_blank" title="dreajay">dreajay</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"dreajaygithubblog"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F77edef7e6931022edbd2322ec66456e1' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<div id="totop" style="position:fixed;bottom:150px;right:50px;cursor: pointer;">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+<script type="text/javascript">
+	(function($) { 
+		// When to show the scroll link
+		// higher number = scroll link appears further down the page   
+		var upperLimit = 300;
+		
+		// Our scroll link element
+		var scrollElem = $('#totop');
+	   
+		// Scroll to top speed
+		var scrollSpeed = 800;
+	   
+		// Show and hide the scroll to top link based on scroll position   
+		scrollElem.hide();
+		$(window).scroll(function () {            
+			var scrollTop = $(document).scrollTop();       
+			if ( scrollTop > upperLimit ) {
+				$(scrollElem).stop().fadeTo(300, 1); // fade back in           
+			}else{       
+				$(scrollElem).stop().fadeTo(300, 0); // fade out
+			}
+		});
+		// Scroll to top animation on click
+		$(scrollElem).click(function(){
+			$('html, body').animate({scrollTop:0}, scrollSpeed); return false;
+		});
+	})(jQuery);
+</script>
+
+
+  </body>
+</html>
+

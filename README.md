@@ -5,7 +5,7 @@
 访问博客：[dreajay's blog](http://dreajay.github.io)
 
 # 关注我:
-- 微博：[dreajay](http://weibo.com/2583230784/) 
-- 豆瓣：[dreajay](http://www.douban.com/people/72514701/)
-- 知乎：[dreajay](http://www.zhihu.com/people/dreajay-day)
+- 微博：[dreajay](http://weibo.com/dreajay/) 
+- 豆瓣：[dreajay](http://www.douban.com/people/dreajay/)
+- 知乎：[dreajay](http://www.zhihu.com/people/dreajay/)
 - 邮箱：dreajay@163.com
