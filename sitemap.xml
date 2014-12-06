@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://dreajay.github.io/2014/12/01/effective%20java-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E5%9B%9B%E7%AB%A0%20%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/</loc>
+    <lastmod>2014-12-06T13:55:33.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://dreajay.github.io/about/index.html</loc>
     <lastmod>2014-12-01T05:36:38.000Z</lastmod>
   </url>
