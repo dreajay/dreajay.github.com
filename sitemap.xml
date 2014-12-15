@@ -2,6 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://dreajay.github.io/2014/12/15/install-activemq-in-mac/</loc>
+    <lastmod>2014-12-15T13:14:56.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dreajay.github.io/2014/11/21/mybatis%E5%AE%9E%E6%88%98%E4%B9%8BSqlSessionFactory/</loc>
+    <lastmod>2014-12-15T12:50:12.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dreajay.github.io/2014/12/08/build-RESTful-use-springmvc/</loc>
+    <lastmod>2014-12-15T11:24:23.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://dreajay.github.io/about/index.html</loc>
     <lastmod>2014-12-07T08:13:40.000Z</lastmod>
   </url>
@@ -54,11 +69,6 @@
   <url>
     <loc>http://dreajay.github.io/baidu_verify_zeE7cTqrUg.html</loc>
     <lastmod>2014-11-21T08:54:38.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dreajay.github.io/2014/11/21/mybatis%E5%AE%9E%E6%88%98%E4%B9%8BSqlSessionFactory/</loc>
-    <lastmod>2014-11-21T07:46:05.000Z</lastmod>
   </url>
   
 </urlset>

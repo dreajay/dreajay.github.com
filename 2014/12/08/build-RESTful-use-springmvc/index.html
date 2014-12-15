@@ -1,0 +1,447 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN" xmlns:wb="http://open.weibo.com/wb">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>使用springmvc创建RESTful风格软件架构 | dreajay&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="dreajay">
+    
+    <meta name="description" content="RESTful是一个现在非常流行的词汇，RESTful是一种软件架构风格，提供了一组设计原则和约束条件。它主要用于客户端和服务器交互类的软件。基于这个风格设计的软件可以更简洁，更有层次，更易于实现缓存等机制。RESTful中的REST（英文：Representational State Transf">
+    
+    
+    
+    
+    <link rel="alternate" href="atom.xml" title="dreajay&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="dreajay&#39;s blog">dreajay&#39;s blog</a></h1>
+				<h2 class="blog-motto">戴竣杰的博客专栏，梦想还是要有的，万一实现了呢！</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+						<li><a href="/atom.xml">RSS订阅</a></li>
+					
+					<li>
+					
+					<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="30" placeholder="搜索" />
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/12/08/build-RESTful-use-springmvc/" title="使用springmvc创建RESTful风格软件架构" itemprop="url">使用springmvc创建RESTful风格软件架构</a>
+  </h1>
+  <!-- 显示作者
+  <p class="article-author">By
+    
+      <a href="http://dreajay.github.io" title="dreajay">dreajay</a>
+    </p>
+  -->  
+  <p class="article-time">
+    <time datetime="2014-12-08T05:38:32.000Z" itemprop="datePublished">2014-12-08</time>
+    更新日期:<time datetime="2014-12-15T11:24:23.000Z" itemprop="dateModified">2014-12-15</time>
+    
+  </p>
+</header>
+
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#REST"><span class="toc-number">1.</span> <span class="toc-text">REST</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#原则条件"><span class="toc-number">1.1.</span> <span class="toc-text">原则条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分层系统"><span class="toc-number">1.2.</span> <span class="toc-text">分层系统</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#springmvc实现RESTful"><span class="toc-number">2.</span> <span class="toc-text">springmvc实现RESTful</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#后端"><span class="toc-number">2.1.</span> <span class="toc-text">后端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#前端"><span class="toc-number">2.2.</span> <span class="toc-text">前端</span></a></li></ol></li></ol>
+		</div>
+		
+		<p>RESTful是一个现在非常流行的词汇，RESTful是一种软件架构风格，提供了一组设计原则和约束条件。它主要用于客户端和服务器交互类的软件。基于这个风格设计的软件可以更简洁，更有层次，更易于实现缓存等机制。RESTful中的REST（英文：Representational State Transfer，简称REST）描述了一个架构样式的网络系统，比如 web应用程序。它首次出现在 2000 年 Roy Fielding 的博士论文中，他是 HTTP 规范的主要编写者之一。关于RESTful可以参考很多文章，本文不过多介绍。</p>
+<h1 id="REST">REST</h1>
+<h2 id="原则条件">原则条件</h2>
+<p>REST 指的是一组架构约束条件和原则。满足这些约束条件和原则的应用程序或设计就是 RESTful。<br>Web 应用程序最重要的 REST 原则是，客户端和服务器之间的交互在请求之间是无状态的。从客户端到服务器的每个请求都必须包含理解请求所必需的信息。如果服务器在请求之间的任何时间点重启，客户端不会得到通知。此外，无状态请求可以由任何可用服务器回答，这十分适合云计算之类的环境。客户端可以缓存数据以改进性能。</p>
+<p>在服务器端，应用程序状态和功能可以分为各种资源。资源是一个有趣的概念实体，它向客户端公开。资源的例子有：应用程序对象、数据库记录、算法等等。每个资源都使用 URI (Universal Resource Identifier) 得到一个唯一的地址。所有资源都共享统一的接口，以便在客户端和服务器之间传输状态。使用的是标准的 HTTP 方法，比如 GET、PUT、POST 和 DELETE。Hypermedia 是应用程序状态的引擎，资源表示通过超链接互联。</p>
+<h2 id="分层系统">分层系统</h2>
+<p>另一个重要的 REST 原则是分层系统，这表示组件无法了解它与之交互的中间层以外的组件。通过将系统知识限制在单个层，可以限制整个系统的复杂性，促进了底层的独立性。<br>当 REST 架构的约束条件作为一个整体应用时，将生成一个可以扩展到大量客户端的应用程序。它还降低了客户端和服务器之间的交互延迟。统一界面简化了整个系统架构，改进了子系统之间交互的可见性。REST 简化了客户端和服务器的实现。</p>
+<p>关于RESTful的理解可以参考阮一峰的文章：《<a href="http://www.ruanyifeng.com/blog/2011/09/restful.html" target="_blank" rel="external">理解RESTful架构</a>》。</p>
+<p>关于REST中状态的说明可以参考这篇文章《<a href="http://developer.51cto.com/art/200906/129424.htm" target="_blank" rel="external">对于REST中无状态(stateless)的一点认识</a>》，文章中提到应用状态（Application State）和资源状态（Resource State）的不同，应用状态指的是与某一特定请求相关的状态信息，而资源状态则反映了某一存储在服务器端资源在某一时刻的特定状态，该状态不会因为用户请求而改变，任何用户在同一时刻对该资源的请求都会获得这一状态的表现（Representation）。应用状态的典型例子就是在登录的时候需要提供身份验证，这是和登录请求相关的状态信息，而资源状态的典型例子就是会话状态Session ID，这个是服务端负责保存的，其实有状态和无状态与请求本身没有多大关联，重要的是状态信息是由请求方还是响应方负责保存，最后归集为应用状态为REST风格,而资源状态属于UNREST风格.</p>
+<h1 id="springmvc实现RESTful">springmvc实现RESTful</h1>
+<p>使用springmvc很容易实现RESTful风格架构，通过给注解@RequestMapping指定method参数就可以完成，method参数的值包括RequestMethod.GET、RequestMethod.POST、RequestMethod.PUT、RequestMethod.DELETE，分别对应HTTP的标准方法GET、POST、PUT、DELETE。这四个方法就对应资源的增删改查操作，在本案例中对应的方法如下：</p>
+<pre><code>HTTP GET    /<span class="literal">user</span>/<span class="number">1</span> ——》 SpringMVC get     获得ID为<span class="number">1</span>的用户
+HTTP PATCH  /<span class="literal">user</span>   ——》 SpringMVC getList 获得用户列表
+HTTP POST   /<span class="literal">user</span>   ——》 SpringMVC add     添加用户
+HTTP PUT    /<span class="literal">user</span>   ——》 SpringMVC update  更新用户
+HTTP DELETE /<span class="literal">user</span>/<span class="number">1</span> ——》 SpringMVC delete  删除用户为<span class="number">1</span>的用户
+</code></pre><h2 id="后端">后端</h2>
+<p>后端使用springmvc的实现，Controller要注意的两个地方就是，在POST、PUT提交的时候请求参数使用注解@RequestBody指定请求参数为<code>json字符串</code>类型，非json对象，所以前端上送的数据需要格式化为json字符串，返回值使用注解@ResponseBody指定返回类型为json。具体代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div></pre></td><td class="code"><pre><div class="line"><span class="annotation">@Controller</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RESTfulController</span> <span class="keyword">extends</span> <span class="title">Context</span> </span>{</div><div class="line">    <span class="javadoc">/**</span></div><div class="line">     * 查询单个用户</div><div class="line">     * </div><div class="line">     *<span class="javadoctag"> @param</span> userId</div><div class="line">     *<span class="javadoctag"> @return</span></div><div class="line">     */</div><div class="line">    <span class="annotation">@RequestMapping</span>(value = <span class="string">"/user/{userId}"</span>, method = RequestMethod.GET)</div><div class="line">    <span class="annotation">@ResponseBody</span></div><div class="line">    <span class="keyword">public</span> User <span class="title">get</span>(@<span class="title">PathVariable</span>("userId") <span class="keyword">int</span> userId) {</div><div class="line">        Log4jUtil.debug(<span class="keyword">this</span>, <span class="string">"获取用户userId="</span> + userId);</div><div class="line">        User user = createUser(userId);</div><div class="line">        <span class="keyword">return</span> user;</div><div class="line">    }</div><div class="line">    <span class="javadoc">/**</span></div><div class="line">     * 查询用户列表</div><div class="line">     * </div><div class="line">     *<span class="javadoctag"> @param</span> user</div><div class="line">     *<span class="javadoctag"> @return</span></div><div class="line">     */</div><div class="line">    <span class="annotation">@RequestMapping</span>(value = <span class="string">"/user"</span>, method = RequestMethod.PATCH)</div><div class="line">    <span class="annotation">@ResponseBody</span></div><div class="line">    <span class="keyword">public</span> List&lt;User&gt; <span class="title">getList</span>(@RequestBody User user) {</div><div class="line">        <span class="comment">// 可以根据具体参数来查询所有符合的用户，比如查询用户名称为张三的人，username='张三'</span></div><div class="line">        Log4jUtil.debug(<span class="keyword">this</span>, <span class="string">"获取用户列表user="</span> + user);</div><div class="line">        List&lt;User&gt; list = <span class="keyword">new</span> ArrayList&lt;User&gt;();</div><div class="line">        list.add(createUser(<span class="number">1</span>));</div><div class="line">        list.add(createUser(<span class="number">2</span>));</div><div class="line">        list.add(createUser(<span class="number">3</span>));</div><div class="line">        list.add(createUser(<span class="number">4</span>));</div><div class="line">        list.add(createUser(<span class="number">5</span>));</div><div class="line">        <span class="keyword">return</span> list;</div><div class="line">    }</div><div class="line">    <span class="javadoc">/**</span></div><div class="line">     * 新增用户</div><div class="line">     * </div><div class="line">     *<span class="javadoctag"> @param</span> user</div><div class="line">     *<span class="javadoctag"> @return</span></div><div class="line">     */</div><div class="line">    <span class="annotation">@RequestMapping</span>(value = <span class="string">"/user"</span>, method = RequestMethod.POST)</div><div class="line">    <span class="annotation">@ResponseBody</span></div><div class="line">    <span class="keyword">public</span> Object <span class="title">add</span>(@RequestBody User user) {</div><div class="line">        Log4jUtil.debug(<span class="keyword">this</span>, <span class="string">"新增用户："</span> + user);</div><div class="line">        Map&lt;String, Object&gt; dataMap = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</div><div class="line">        dataMap.put(<span class="string">"user"</span>, user);</div><div class="line">        dataMap.put(<span class="string">"result"</span>, <span class="string">"新增用户成功"</span>);</div><div class="line">        <span class="keyword">return</span> dataMap;</div><div class="line">    }</div><div class="line">    <span class="javadoc">/**</span></div><div class="line">     * 更新用户</div><div class="line">     * </div><div class="line">     *<span class="javadoctag"> @param</span> user</div><div class="line">     *<span class="javadoctag"> @return</span></div><div class="line">     */</div><div class="line">    <span class="annotation">@RequestMapping</span>(value = <span class="string">"/user"</span>, method = RequestMethod.PUT)</div><div class="line">    <span class="annotation">@ResponseBody</span></div><div class="line">    <span class="keyword">public</span> Object <span class="title">update</span>(@RequestBody User user) {</div><div class="line">        User u = createUser(<span class="number">5</span>);</div><div class="line">        u.setUsername(user.getUsername());</div><div class="line">        Log4jUtil.debug(<span class="keyword">this</span>, <span class="string">"更新用户："</span> + user);</div><div class="line">        Map&lt;String, Object&gt; dataMap = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</div><div class="line">        dataMap.put(<span class="string">"user"</span>, user);</div><div class="line">        dataMap.put(<span class="string">"result"</span>, <span class="string">"更新用户成功"</span>);</div><div class="line">        <span class="keyword">return</span> dataMap;</div><div class="line">    }</div><div class="line">    <span class="javadoc">/**</span></div><div class="line">     * 删除用户</div><div class="line">     * </div><div class="line">     *<span class="javadoctag"> @param</span> userId</div><div class="line">     *<span class="javadoctag"> @return</span></div><div class="line">     */</div><div class="line">    <span class="annotation">@RequestMapping</span>(value = <span class="string">"/user/{userId}"</span>, method = RequestMethod.DELETE)</div><div class="line">    <span class="annotation">@ResponseBody</span></div><div class="line">    <span class="keyword">public</span> Object <span class="title">delete</span>(@<span class="title">PathVariable</span>("userId") <span class="keyword">int</span> userId) {</div><div class="line">        Log4jUtil.debug(<span class="keyword">this</span>, <span class="string">"删除用户userId="</span> + userId);</div><div class="line">        Map&lt;String, Object&gt; dataMap = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</div><div class="line">        dataMap.put(<span class="string">"result"</span>, <span class="string">"删除用户成功"</span>);</div><div class="line">        <span class="keyword">return</span> dataMap;</div><div class="line">    }</div><div class="line">    <span class="javadoc">/**</span></div><div class="line">     * 创建用户</div><div class="line">     * </div><div class="line">     *<span class="javadoctag"> @param</span> userId</div><div class="line">     *<span class="javadoctag"> @return</span></div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> User <span class="title">createUser</span>(<span class="keyword">int</span> userId) {</div><div class="line">        User user = <span class="keyword">new</span> User();</div><div class="line">        user.setUserId(userId);</div><div class="line">        user.setUsername(<span class="string">"user"</span> + userId);</div><div class="line">        user.setPassword(<span class="string">"123456"</span>);</div><div class="line">        user.setEmail(<span class="string">"user"</span> + userId + <span class="string">"@xxx.com"</span>);</div><div class="line">        user.setSex(<span class="string">"男"</span>);</div><div class="line">        user.setTelephone(<span class="string">"1234567"</span>);</div><div class="line">        <span class="keyword">return</span> user;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h2 id="前端">前端</h2>
+<p>这里前端使用Ajax方式提交，非表单提交，Ajax提交的时候注意几个参数：type、dataType、contentType，type根据方法不同可以设置为：GET、POST、PUT、DELETE，dataType指定为’json’格式，contentType指定为’application/json’，data数据在非GET请求时需要使用<code>JSON.stringify</code>进行格式化为json字符串，具体代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"Content-Type"</span> <span class="attribute">content</span>=<span class="value">"text/html; charset=UTF-8"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">title</span>&gt;</span>restful test<span class="tag">&lt;/<span class="title">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"js/jquery-1.11.1.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">getUser</span><span class="params">()</span> </span>{</div><div class="line">        $.ajax({</div><div class="line">            url : <span class="string">"user/1"</span>,</div><div class="line">            type : <span class="string">'GET'</span>,</div><div class="line">            dataType : <span class="string">'json'</span>,</div><div class="line">            contentType : <span class="string">'application/json'</span>,</div><div class="line">            success : successFunc,</div><div class="line">            error : errorFunc</div><div class="line">        });</div><div class="line">    }</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">getUserList</span><span class="params">()</span> </span>{</div><div class="line">        $.ajax({</div><div class="line">            url : <span class="string">"user"</span>,</div><div class="line">            data : <span class="built_in">JSON</span>.stringify({<span class="string">'username'</span>:<span class="string">'user'</span>}),</div><div class="line">            type : <span class="string">'PATCH'</span>,</div><div class="line">            dataType : <span class="string">'json'</span>,</div><div class="line">            contentType : <span class="string">'application/json'</span>,</div><div class="line">            success : successFunc,</div><div class="line">            error : errorFunc</div><div class="line">        });</div><div class="line">    }</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">addUser</span><span class="params">()</span> </span>{</div><div class="line">        $.ajax({</div><div class="line">            url : <span class="string">"user"</span>,</div><div class="line">            data : <span class="built_in">JSON</span>.stringify({<span class="string">'userId'</span>:<span class="number">1</span>, <span class="string">'email'</span>:<span class="string">'user1@xxx.com'</span>, <span class="string">'telephone'</span>:<span class="string">'1234567'</span>, <span class="string">'username'</span>:<span class="string">'user1'</span>, <span class="string">'password'</span>:<span class="string">'123456'</span>, <span class="string">'sex'</span>:<span class="string">'男'</span>   }),</div><div class="line">            type : <span class="string">'POST'</span>,</div><div class="line">            dataType : <span class="string">'json'</span>,</div><div class="line">            contentType : <span class="string">'application/json'</span>,</div><div class="line">            success : successFunc,</div><div class="line">            error : errorFunc</div><div class="line">        });</div><div class="line">    }</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">updateUser</span><span class="params">()</span> </span>{</div><div class="line">        $.ajax({</div><div class="line">            url : <span class="string">"user"</span>,</div><div class="line">            data : <span class="built_in">JSON</span>.stringify({<span class="string">'userId'</span>:<span class="number">1</span>, <span class="string">'email'</span>:<span class="string">'user1@xxx.com'</span>, <span class="string">'telephone'</span>:<span class="string">'1234567'</span>, <span class="string">'username'</span>:<span class="string">'user1_newName'</span>, <span class="string">'password'</span>:<span class="string">'123456'</span>, <span class="string">'sex'</span>:<span class="string">'男'</span>   }),</div><div class="line">            type : <span class="string">'PUT'</span>,</div><div class="line">            async : <span class="literal">true</span>,</div><div class="line">            dataType : <span class="string">'json'</span>,</div><div class="line">            contentType : <span class="string">'application/json'</span>,</div><div class="line">            success : successFunc,</div><div class="line">            error : errorFunc</div><div class="line">        });</div><div class="line">    }</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">deleteUser</span><span class="params">()</span> </span>{</div><div class="line">        $.ajax({</div><div class="line">            url : <span class="string">"user/1"</span>,</div><div class="line">            type : <span class="string">'DELETE'</span>,</div><div class="line">            dataType : <span class="string">'json'</span>,</div><div class="line">            contentType : <span class="string">'application/json'</span>,</div><div class="line">            success : successFunc,</div><div class="line">            error : errorFunc</div><div class="line">        });</div><div class="line">    }</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">successFunc</span><span class="params">(data)</span> </span>{</div><div class="line">        $(<span class="string">"#msg"</span>).text(<span class="built_in">JSON</span>.stringify(data))</div><div class="line">    }</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">errorFunc</span><span class="params">(data)</span> </span>{</div><div class="line">        $(<span class="string">"#msg"</span>).text(<span class="built_in">JSON</span>.stringify(data))</div><div class="line">    }</div><div class="line"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">onclick</span>=<span class="value">"getUser();"</span> <span class="attribute">value</span>=<span class="value">"get user"</span>&gt;</span><span class="tag">&lt;<span class="title">br</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">onclick</span>=<span class="value">"getUserList();"</span> <span class="attribute">value</span>=<span class="value">"get user list"</span>&gt;</span><span class="tag">&lt;<span class="title">br</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">onclick</span>=<span class="value">"addUser();"</span> <span class="attribute">value</span>=<span class="value">"add user"</span>&gt;</span><span class="tag">&lt;<span class="title">br</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">onclick</span>=<span class="value">"updateUser();"</span> <span class="attribute">value</span>=<span class="value">"update user"</span>&gt;</span><span class="tag">&lt;<span class="title">br</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">onclick</span>=<span class="value">"deleteUser();"</span> <span class="attribute">value</span>=<span class="value">"delete user"</span>&gt;</span><span class="tag">&lt;<span class="title">br</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"msg"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/dreajay/springMVC-demo" target="_blank" rel="external">代码下载</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-share" id="share">
+
+  
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+    <span class="jiathis_txt">分享到：</span>
+    <a class="jiathis_button_qzone"></a>
+    <a class="jiathis_button_tsina"></a>
+    <a class="jiathis_button_tqq"></a>
+    <a class="jiathis_button_weixin"></a>
+    <a class="jiathis_button_renren"></a>
+    <a href="http://www.jiathis.com/share?uid=1987046" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+    <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1987046" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+</div>
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/javaee/">javaee</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/RESTful/">RESTful</a><a href="/tags/javaee/">javaee</a><a href="/tags/spring/">spring</a><a href="/tags/springmvc/">springmvc</a><a href="/tags/ajax/">ajax</a><a href="/tags/json/">json</a>
+  </div>
+
+
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/12/15/install-activemq-in-mac/" title="MAC系统安装acitivemq">
+  <strong>上一篇:</strong><br/>
+  <span>
+  MAC系统安装acitivemq</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/12/01/effective java-读书笔记-第四章 类和接口/"  title="effective java-读书笔记-第四章 类和接口">
+ <strong>下一篇:</strong><br/> 
+ <span>effective java-读书笔记-第四章 类和接口
+</span>
+</a>
+</div>
+
+</nav>
+
+	<!-- 多说-->
+
+<section class="comment">
+<div class="ds-thread" data-thread-key="post-使用springmvc创建RESTful风格软件架构" data-title="使用springmvc创建RESTful风格软件架构" data-url="http://dreajay.github.io/2014/12/08/build-RESTful-use-springmvc/"></div>
+</section>
+<!-- disqus-->
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  <p class="asidetitle">关注</p>
+<iframe width="100%" height="120" class="share_self" marginheight="5px" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=120&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=2583230784&verifier=1d07a1a0&dpc=1"></iframe>
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/博客/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		
+			<li><a href="/categories/java/" title="java">java<sup>4</sup></a></li>
+		
+			<li><a href="/categories/java/java-framework/" title="java-framework">java-framework<sup>2</sup></a></li>
+		
+			<li><a href="/categories/javaee/" title="javaee">javaee<sup>1</sup></a></li>
+		
+			<li><a href="/categories/博客/" title="博客">博客<sup>1</sup></a></li>
+		
+			<li><a href="/categories/职业规划/" title="职业规划">职业规划<sup>1</sup></a></li>
+		
+			<li><a href="/categories/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
+		
+			<li><a href="/categories/java/读书笔记/" title="读书笔记">读书笔记<sup>2</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/RESTful/" title="RESTful">RESTful<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Singleton模式/" title="Singleton模式">Singleton模式<sup>1</sup></a></li>
+		
+			<li><a href="/tags/SqlSessionFactory/" title="SqlSessionFactory">SqlSessionFactory<sup>1</sup></a></li>
+		
+			<li><a href="/tags/activemq/" title="activemq">activemq<sup>1</sup></a></li>
+		
+			<li><a href="/tags/ajax/" title="ajax">ajax<sup>1</sup></a></li>
+		
+			<li><a href="/tags/effective-java/" title="effective java">effective java<sup>2</sup></a></li>
+		
+			<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+		
+			<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		
+			<li><a href="/tags/java/" title="java">java<sup>1</sup></a></li>
+		
+			<li><a href="/tags/javaee/" title="javaee">javaee<sup>1</sup></a></li>
+		
+			<li><a href="/tags/jms/" title="jms">jms<sup>1</sup></a></li>
+		
+			<li><a href="/tags/json/" title="json">json<sup>1</sup></a></li>
+		
+			<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
+		
+			<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+		
+			<li><a href="/tags/mybatis/" title="mybatis">mybatis<sup>1</sup></a></li>
+		
+			<li><a href="/tags/spring/" title="spring">spring<sup>1</sup></a></li>
+		
+			<li><a href="/tags/springmvc/" title="springmvc">springmvc<sup>1</sup></a></li>
+		
+			<li><a href="/tags/互联网/" title="互联网">互联网<sup>1</sup></a></li>
+		
+			<li><a href="/tags/单例模式/" title="单例模式">单例模式<sup>1</sup></a></li>
+		
+			<li><a href="/tags/博客/" title="博客">博客<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://blog.csdn.net/dreajay" target="_blank" title="dreajay csdn">我的CSDN</a></li>
+      <li><a href="https://github.com/dreajay" target="_blank" title="dreajay Github">我的Github</a></li>
+      <li><a href="http://www.douban.com/people/dreajay" target="_blank" title="dreajay豆瓣">我的豆瓣</a></li>
+ <!-- <li><a href="http://www.zhihu.com/people/dreajay" target="_blank" title="dreajay知乎">我的知乎</a></li> -->
+    </ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="pacman">pacman</a> © 2014 
+		
+		<a href="http://dreajay.github.io" target="_blank" title="dreajay">dreajay</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"dreajaygithubblog"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F77edef7e6931022edbd2322ec66456e1' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<div id="totop" style="position:fixed;bottom:150px;right:50px;cursor: pointer;">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+<script type="text/javascript">
+	(function($) { 
+		// When to show the scroll link
+		// higher number = scroll link appears further down the page   
+		var upperLimit = 300;
+		
+		// Our scroll link element
+		var scrollElem = $('#totop');
+	   
+		// Scroll to top speed
+		var scrollSpeed = 800;
+	   
+		// Show and hide the scroll to top link based on scroll position   
+		scrollElem.hide();
+		$(window).scroll(function () {            
+			var scrollTop = $(document).scrollTop();       
+			if ( scrollTop > upperLimit ) {
+				$(scrollElem).stop().fadeTo(300, 1); // fade back in           
+			}else{       
+				$(scrollElem).stop().fadeTo(300, 0); // fade out
+			}
+		});
+		// Scroll to top animation on click
+		$(scrollElem).click(function(){
+			$('html, body').animate({scrollTop:0}, scrollSpeed); return false;
+		});
+	})(jQuery);
+</script>
+
+
+  </body>
+</html>
+

@@ -539,7 +539,7 @@ header nav ul li a:hover {
 }
 @media only screen and (min-width: 1024px) {
   .search input {
-    width: 8em;
+    width: 15em;
     -webkit-transition: 0.5s width;
     -moz-transition: 0.5s width;
     -o-transition: 0.5s width;
@@ -1722,7 +1722,7 @@ section.comment {
 footer {
   margin-top: 1em;
   background: #595f62;
-  padding: 0 2% 0.5em;
+  padding: 0;
 }
 #footer {
   width: 95%;
