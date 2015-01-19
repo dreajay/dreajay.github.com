@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://dreajay.github.io/2015/01/19/webservice-develop/</loc>
+    <lastmod>2015-01-19T15:10:01.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://dreajay.github.io/2014/12/17/rolling-table-data/</loc>
     <lastmod>2014-12-17T09:55:01.000Z</lastmod>
   </url>

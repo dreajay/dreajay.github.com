@@ -3,6 +3,48 @@
 
     
   <url>
+    <loc>http://dreajay.github.io/2015/01/19/webservice-develop/</loc>
+    <lastmod>2015-01-19T15:10:01.000Z</lastmod>
+    <data>
+        <display>
+        <title>webservice 开发笔记</title>
+        <pubTime>2015-01-19T14:09:48.000Z</pubTime>
+        
+        <tag>webservice </tag>
+         
+        <tag>cxf </tag>
+         
+         <content><![CDATA[<p>把之前学习webservice的知识笔记整理一下，学习webservice先要了解webservice的产生理念，或者叫目标，webservice是为了解决异构平台，夸操作系统、夸语言、夸终端之间的交互，比如一个使用.net开发的微软系统平台要和一个使用Java语言开发的平台交互，就可以采用webservcie。  </p>
+<p>webservice开发框架有很多，比较出名的有axis2和cxf，axis2是由axis1发展而来，cxf是由XFire和Celtix发展而来，它们都是Apache旗下的开源框架，为什么Apache要搞两个不同的框架呢，其实axis2支持多种语言，比如c++，所以包含内容会比较多，而cxf主要是针对java平台的，相对axis来说，体积小了很多，其实Java平台本身也提供了webservice的开发JAX-RS，但cxf是能简化以及加强Java本身的webservice开发，并不是替代，cxf完全实现了JAX-RS 2.0标准。具体对比可以参考这篇文章： <a href="http://www.cnblogs.com/growup/archive/2011/03/06/1972464.html" target="_blank" rel="external">Axis，axis2，Xfire以及cxf对比</a>。</p>
+<p>在学习使用cxf开发webservice的时候，最好先了解一下webservice由哪几部分组成，其实最主要的就是WSDL、SOAP和UUDI，知道了这三个是什么东西，有什么作用之后，开发webservice就相对来说挺简单的了。<br>WSDL称为webservcie的描述语言，英文为Web Service Description Language。这句话太抽象了，其实你只需要知道这个文件就是描述webservcie提供了哪些服务，这些服务是由什么接口提供的，这些接口包含了哪些方法，方法的输入和输出参数是什么，这样想一下就很容易理解了。参考教程：<a href="http://www.w3school.com.cn/wsdl/" target="_blank" rel="external">http://www.w3school.com.cn/wsdl/</a></p>
+<p>SOAP称为简单对象访问协议，英文为Simple Object Access Protocol，它是一种协议，我们有接触过TCP、HTTP等协议，相对比较熟悉，这个也类似，只不过这个协议主要是由XML来组织，XML包含了Envelope元素，Envelope包含了HEAD、BODY元素，BODY里面具体定义了传输方法和参数，参考教程：<a href="http://www.w3school.com.cn/soap/index.asp。" target="_blank" rel="external">http://www.w3school.com.cn/soap/index.asp。</a></p>
+<p>UUDI称为统一描述、发现和集成协议，英文为Universal Description Discovery and Integration。有了服务就需要别人找得到，否则他们就无法使用，UUDI就是干这个的，让你可以查找到有哪些webservcie服务，参考教程：<a href="http://www.w3school.com.cn/wsdl/wsdl_uddi.asp。" target="_blank" rel="external">http://www.w3school.com.cn/wsdl/wsdl_uddi.asp。</a></p>
+<p>了解了webservice三要素后，开发起来就相对简单。使用Java本身自带的服务开发也很简单，这里不再描述，下面记录一下cxf开发webservice的资料，学习CXF的最好教程就是官方文档了，官方文档例子实在很齐全，没必要再看其他教程了，教程为英文，如果不太懂，可以直接看例子。</p>
+<p>下载：<br><a href="http://cxf.apache.org/download.html" target="_blank" rel="external">http://cxf.apache.org/download.html</a><br>apache-cxf-2.7.14.tar.gz<br>解压后包含：<br>bin:很多实用工具：wsdl2java、java2wsdl….<br>docs:java文档<br>lib:包含所有依赖包<br>modules：包含各种模块<br>samples：包含很多例子可以参考，例子描述：</p>
+<p>具体的使用都能在CXF User’s Guide找到：<br><a href="http://cxf.apache.org/docs/index.html" target="_blank" rel="external">http://cxf.apache.org/docs/index.html</a></p>
+<p>服务端开发：<br><a href="http://cxf.apache.org/docs/developing-a-service.html" target="_blank" rel="external">http://cxf.apache.org/docs/developing-a-service.html</a></p>
+<p>客户端开发：<br><a href="http://cxf.apache.org/docs/how-do-i-develop-a-client.html" target="_blank" rel="external">http://cxf.apache.org/docs/how-do-i-develop-a-client.html</a></p>
+<p>CXF包含的例子<br>Apache CXF Example Projects:<br><a href="http://cxf.apache.org/docs/sample-projects.html" target="_blank" rel="external">http://cxf.apache.org/docs/sample-projects.html</a><br><a href="http://svn.apache.org/viewvc/cxf/trunk/distribution/src/main/release/samples/" target="_blank" rel="external">http://svn.apache.org/viewvc/cxf/trunk/distribution/src/main/release/samples/</a><br>JAX-WS Examples<br>WSDL-First Examples<br>JAX-REST Examples<br>Javascript Examples<br>WS-* Examples<br>Data Bindings Examples<br>CXF and JMS Examples<br>JBI Examples<br>JCA Examples<br>Miscellaneous Examples<br>CORBA Examples</p>
+<p>CXF与spring集成<br><a href="http://cxf.apache.org/docs/writing-a-service-with-spring.html" target="_blank" rel="external">http://cxf.apache.org/docs/writing-a-service-with-spring.html</a></p>
+<p>CXF开发RESTful services<br>参考例子JAX-REST Examples<br><a href="http://cxf.apache.org/docs/restful-services.html" target="_blank" rel="external">http://cxf.apache.org/docs/restful-services.html</a></p>
+<p>CXF Maven:<br>CXF开发推荐使用maven来开发，参考文章：<a href="http://cxf.apache.org/docs/using-cxf-with-maven.html" target="_blank" rel="external">http://cxf.apache.org/docs/using-cxf-with-maven.html</a><br>参考文章：使用 Apache Maven 和 CXF 构建 RESTful web services<br><a href="http://www.ibm.com/developerworks/cn/opensource/os-restfulwebservices/index.html" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/opensource/os-restfulwebservices/index.html</a></p>
+<p>pom依赖：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">properties</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">cxf.version</span>&gt;</span>2.7.14<span class="tag">&lt;/<span class="title">cxf.version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">properties</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">dependencies</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.cxf<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>cxf-rt-frontend-jaxws<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">version</span>&gt;</span>${cxf.version}<span class="tag">&lt;/<span class="title">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.cxf<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>cxf-rt-transports-http<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">version</span>&gt;</span>${cxf.version}<span class="tag">&lt;/<span class="title">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- Jetty is needed if you're using the CXFServlet --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.cxf<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>cxf-rt-transports-http-jetty<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">version</span>&gt;</span>${cxf.version}<span class="tag">&lt;/<span class="title">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">dependencies</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>CXF3和CXF2<br>CXF3完全实现了JAX-RS 2.0，cxf只支持部分，还要一些其他的特性，完整说明：<br>CXF3：<a href="http://cxf.apache.org/docs/30-migration-guide.html" target="_blank" rel="external">http://cxf.apache.org/docs/30-migration-guide.html</a><br>CXF2：<a href="http://cxf.apache.org/docs/27-migration-guide.html" target="_blank" rel="external">http://cxf.apache.org/docs/27-migration-guide.html</a></p>
+]]></content>
+         
+         
+           
+             
+              <breadCrumb title="webservice" url="http://dreajay.github.io/categories/webservice/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://dreajay.github.io/2014/12/17/rolling-table-data/</loc>
     <lastmod>2014-12-17T09:55:01.000Z</lastmod>
     <data>

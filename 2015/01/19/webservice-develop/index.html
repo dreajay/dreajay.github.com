@@ -4,20 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>进化：屌丝的互联网逆袭之路 | dreajay&#39;s blog</title>
+    <title>webservice 开发笔记 | dreajay&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="dreajay">
     
-    <meta name="description" content="这是我在CSDN参加《有奖试读&amp;amp;征文——我们在互联网上奋斗的故事》活动写的一篇读后感，并且获奖。
-文章内容包括：
-1. 书籍介绍
-2. 屌丝的现状
-3. 激情燃烧的岁月-互联网进化
-4. 屌丝逆袭之路进化为互联网高富帅
-5. 后记
-6. 资料推荐
-原文：进化：屌丝的互联网逆袭之路。">
+    <meta name="description" content="把之前学习webservice的知识笔记整理一下，学习webservice先要了解webservice的产生理念，或者叫目标，webservice是为了解决异构平台，夸操作系统、夸语言、夸终端之间的交互，比如一个使用.net开发的微软系统平台要和一个使用Java语言开发的平台交互，就可以采用webs">
     
     
     
@@ -76,7 +68,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/11/25/进化：屌丝的互联网逆袭之路/" title="进化：屌丝的互联网逆袭之路" itemprop="url">进化：屌丝的互联网逆袭之路</a>
+      <a href="/2015/01/19/webservice-develop/" title="webservice 开发笔记" itemprop="url">webservice 开发笔记</a>
   </h1>
   <!-- 显示作者
   <p class="article-author">By
@@ -85,8 +77,8 @@
     </p>
   -->  
   <p class="article-time">
-    <time datetime="2014-11-25T05:10:13.000Z" itemprop="datePublished">2014-11-25</time>
-    更新日期:<time datetime="2014-11-25T05:33:33.000Z" itemprop="dateModified">2014-11-25</time>
+    <time datetime="2015-01-19T14:09:48.000Z" itemprop="datePublished">2015-01-19</time>
+    更新日期:<time datetime="2015-01-19T15:10:01.000Z" itemprop="dateModified">2015-01-19</time>
     
   </p>
 </header>
@@ -99,15 +91,24 @@
 		
 		</div>
 		
-		<p>这是我在CSDN参加《<a href="http://blog.csdn.net/blogdevteam/article/details/40047403" target="_blank" rel="external">有奖试读&amp;征文——我们在互联网上奋斗的故事</a>》活动写的一篇读后感，并且获奖。</p>
-<p>文章内容包括：</p>
-<pre><code><span class="bullet">1. </span>书籍介绍
-<span class="bullet">2. </span>屌丝的现状
-<span class="bullet">3. </span>激情燃烧的岁月-互联网进化
-<span class="bullet">4. </span>屌丝逆袭之路进化为互联网高富帅
-<span class="bullet">5. </span>后记
-<span class="bullet">6. </span>资料推荐
-</code></pre><p>原文：<a href="http://blog.csdn.net/dreajay/article/details/40812623" target="_blank" rel="external">进化：屌丝的互联网逆袭之路</a>。</p>
+		<p>把之前学习webservice的知识笔记整理一下，学习webservice先要了解webservice的产生理念，或者叫目标，webservice是为了解决异构平台，夸操作系统、夸语言、夸终端之间的交互，比如一个使用.net开发的微软系统平台要和一个使用Java语言开发的平台交互，就可以采用webservcie。  </p>
+<p>webservice开发框架有很多，比较出名的有axis2和cxf，axis2是由axis1发展而来，cxf是由XFire和Celtix发展而来，它们都是Apache旗下的开源框架，为什么Apache要搞两个不同的框架呢，其实axis2支持多种语言，比如c++，所以包含内容会比较多，而cxf主要是针对java平台的，相对axis来说，体积小了很多，其实Java平台本身也提供了webservice的开发JAX-RS，但cxf是能简化以及加强Java本身的webservice开发，并不是替代，cxf完全实现了JAX-RS 2.0标准。具体对比可以参考这篇文章： <a href="http://www.cnblogs.com/growup/archive/2011/03/06/1972464.html" target="_blank" rel="external">Axis，axis2，Xfire以及cxf对比</a>。</p>
+<p>在学习使用cxf开发webservice的时候，最好先了解一下webservice由哪几部分组成，其实最主要的就是WSDL、SOAP和UUDI，知道了这三个是什么东西，有什么作用之后，开发webservice就相对来说挺简单的了。<br>WSDL称为webservcie的描述语言，英文为Web Service Description Language。这句话太抽象了，其实你只需要知道这个文件就是描述webservcie提供了哪些服务，这些服务是由什么接口提供的，这些接口包含了哪些方法，方法的输入和输出参数是什么，这样想一下就很容易理解了。参考教程：<a href="http://www.w3school.com.cn/wsdl/" target="_blank" rel="external">http://www.w3school.com.cn/wsdl/</a></p>
+<p>SOAP称为简单对象访问协议，英文为Simple Object Access Protocol，它是一种协议，我们有接触过TCP、HTTP等协议，相对比较熟悉，这个也类似，只不过这个协议主要是由XML来组织，XML包含了Envelope元素，Envelope包含了HEAD、BODY元素，BODY里面具体定义了传输方法和参数，参考教程：<a href="http://www.w3school.com.cn/soap/index.asp。" target="_blank" rel="external">http://www.w3school.com.cn/soap/index.asp。</a></p>
+<p>UUDI称为统一描述、发现和集成协议，英文为Universal Description Discovery and Integration。有了服务就需要别人找得到，否则他们就无法使用，UUDI就是干这个的，让你可以查找到有哪些webservcie服务，参考教程：<a href="http://www.w3school.com.cn/wsdl/wsdl_uddi.asp。" target="_blank" rel="external">http://www.w3school.com.cn/wsdl/wsdl_uddi.asp。</a></p>
+<p>了解了webservice三要素后，开发起来就相对简单。使用Java本身自带的服务开发也很简单，这里不再描述，下面记录一下cxf开发webservice的资料，学习CXF的最好教程就是官方文档了，官方文档例子实在很齐全，没必要再看其他教程了，教程为英文，如果不太懂，可以直接看例子。</p>
+<p>下载：<br><a href="http://cxf.apache.org/download.html" target="_blank" rel="external">http://cxf.apache.org/download.html</a><br>apache-cxf-2.7.14.tar.gz<br>解压后包含：<br>bin:很多实用工具：wsdl2java、java2wsdl….<br>docs:java文档<br>lib:包含所有依赖包<br>modules：包含各种模块<br>samples：包含很多例子可以参考，例子描述：</p>
+<p>具体的使用都能在CXF User’s Guide找到：<br><a href="http://cxf.apache.org/docs/index.html" target="_blank" rel="external">http://cxf.apache.org/docs/index.html</a></p>
+<p>服务端开发：<br><a href="http://cxf.apache.org/docs/developing-a-service.html" target="_blank" rel="external">http://cxf.apache.org/docs/developing-a-service.html</a></p>
+<p>客户端开发：<br><a href="http://cxf.apache.org/docs/how-do-i-develop-a-client.html" target="_blank" rel="external">http://cxf.apache.org/docs/how-do-i-develop-a-client.html</a></p>
+<p>CXF包含的例子<br>Apache CXF Example Projects:<br><a href="http://cxf.apache.org/docs/sample-projects.html" target="_blank" rel="external">http://cxf.apache.org/docs/sample-projects.html</a><br><a href="http://svn.apache.org/viewvc/cxf/trunk/distribution/src/main/release/samples/" target="_blank" rel="external">http://svn.apache.org/viewvc/cxf/trunk/distribution/src/main/release/samples/</a><br>JAX-WS Examples<br>WSDL-First Examples<br>JAX-REST Examples<br>Javascript Examples<br>WS-* Examples<br>Data Bindings Examples<br>CXF and JMS Examples<br>JBI Examples<br>JCA Examples<br>Miscellaneous Examples<br>CORBA Examples</p>
+<p>CXF与spring集成<br><a href="http://cxf.apache.org/docs/writing-a-service-with-spring.html" target="_blank" rel="external">http://cxf.apache.org/docs/writing-a-service-with-spring.html</a></p>
+<p>CXF开发RESTful services<br>参考例子JAX-REST Examples<br><a href="http://cxf.apache.org/docs/restful-services.html" target="_blank" rel="external">http://cxf.apache.org/docs/restful-services.html</a></p>
+<p>CXF Maven:<br>CXF开发推荐使用maven来开发，参考文章：<a href="http://cxf.apache.org/docs/using-cxf-with-maven.html" target="_blank" rel="external">http://cxf.apache.org/docs/using-cxf-with-maven.html</a><br>参考文章：使用 Apache Maven 和 CXF 构建 RESTful web services<br><a href="http://www.ibm.com/developerworks/cn/opensource/os-restfulwebservices/index.html" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/opensource/os-restfulwebservices/index.html</a></p>
+<p>pom依赖：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">properties</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">cxf.version</span>&gt;</span>2.7.14<span class="tag">&lt;/<span class="title">cxf.version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">properties</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">dependencies</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.cxf<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>cxf-rt-frontend-jaxws<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">version</span>&gt;</span>${cxf.version}<span class="tag">&lt;/<span class="title">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.cxf<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>cxf-rt-transports-http<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">version</span>&gt;</span>${cxf.version}<span class="tag">&lt;/<span class="title">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- Jetty is needed if you're using the CXFServlet --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.cxf<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>cxf-rt-transports-http-jetty<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">version</span>&gt;</span>${cxf.version}<span class="tag">&lt;/<span class="title">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">dependencies</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>CXF3和CXF2<br>CXF3完全实现了JAX-RS 2.0，cxf只支持部分，还要一些其他的特性，完整说明：<br>CXF3：<a href="http://cxf.apache.org/docs/30-migration-guide.html" target="_blank" rel="external">http://cxf.apache.org/docs/30-migration-guide.html</a><br>CXF2：<a href="http://cxf.apache.org/docs/27-migration-guide.html" target="_blank" rel="external">http://cxf.apache.org/docs/27-migration-guide.html</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -137,13 +138,13 @@ var jiathis_config = {data_track_clickback:'true'};
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/职业规划/">职业规划</a>
+  <a class="article-category-link" href="/categories/webservice/">webservice</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/职业规划/">职业规划</a><a href="/tags/互联网/">互联网</a><a href="/tags/迷茫/">迷茫</a>
+  <span></span> <a href="/tags/webservice/">webservice</a><a href="/tags/cxf/">cxf</a>
   </div>
 
 
@@ -152,19 +153,11 @@ var jiathis_config = {data_track_clickback:'true'};
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2014/11/30/effective java-读书笔记-第三章 对于所有对象都通用的方法/" title="effective java-读书笔记-第三章 对于所有对象都通用的方法">
-  <strong>上一篇:</strong><br/>
-  <span>
-  effective java-读书笔记-第三章 对于所有对象都通用的方法</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2014/11/24/hexo+github搭建博客系统/"  title="hexo+github搭建博客系统">
+<a href="/2014/12/17/rolling-table-data/"  title="表格数据动态滚动">
  <strong>下一篇:</strong><br/> 
- <span>hexo+github搭建博客系统
+ <span>表格数据动态滚动
 </span>
 </a>
 </div>
@@ -174,7 +167,7 @@ var jiathis_config = {data_track_clickback:'true'};
 	<!-- 多说-->
 
 <section class="comment">
-<div class="ds-thread" data-thread-key="post-进化：屌丝的互联网逆袭之路" data-title="进化：屌丝的互联网逆袭之路" data-url="http://dreajay.github.io/2014/11/25/进化：屌丝的互联网逆袭之路/"></div>
+<div class="ds-thread" data-thread-key="post-webservice 开发笔记" data-title="webservice 开发笔记" data-url="http://dreajay.github.io/2015/01/19/webservice-develop/"></div>
 </section>
 <!-- disqus-->
 
