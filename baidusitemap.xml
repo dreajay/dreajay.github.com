@@ -3,8 +3,47 @@
 
     
     
+    
   <url>
-    <loc>http://dreajay.github.io/2014/11/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</loc>
+    <loc>http://dreajay.github.io/2014/11/21/mybatis-build-SqlSessionFactory/</loc>
+    <lastmod>2017-03-08T13:06:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>mybatis构建SqlSessionFactory</title>
+        <pubTime>2014-11-21T03:40:57.000Z</pubTime>
+        
+        <tag>java </tag>
+         
+        <tag>mybatis </tag>
+         
+        <tag>SqlSessionFactory </tag>
+         
+         <content><![CDATA[<p>SqlSessionFactory是mybatis的重要角色，是mybatis的整个程序的入口.<br><a id="more"></a></p>
+<ol>
+<li><p>SqlSessionFactory生命周期<br>SqlSessionFactory生命周期为贯穿整个应用程序,一般保持生命周期都使用同一个实例，所以SqlSessionFactory应该保持全局静态变量或使用单利模式来使用它。如果有多个数据源的时候，需要创建不同的SqlSessionFactory。</p>
+</li>
+<li><p>构建SqlSessionFactory<br>在mybatis中构建SqlSessionFactory有两种方式，一种是根据xml配置文件方式，另一种是也手动编写Java代码方式，手动构建比较繁琐，也不好维护，推荐使用xml配置方式，下面是详细代码。</p>
+</li>
+</ol>
+<figure class="highlight Java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="javadoc">/**</span></div><div class="line"> * SqlSessionFactory生命周期为贯穿整个应用程序,一般保持生命周期都使用同一个实例，所以SqlSessionFactory应该保持全局静态变量或使用单利模式来使用它</div><div class="line"> * </div><div class="line"> *<span class="javadoctag"> @author</span> dreajay</div><div class="line"> * </div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SqlSessionFactoryManager</span> </span>{</div><div class="line">    <span class="comment">// SqlSessionFactory一个实例对应一个数据库配置</span></div><div class="line">    <span class="keyword">public</span> SqlSessionFactory sqlSessionFactory;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> SqlSessionFactoryManager INSTANCE = <span class="keyword">new</span> SqlSessionFactoryManager();</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="title">SqlSessionFactoryManager</span>() {</div><div class="line">        sqlSessionFactory = buildSqlSessionFactoryFromXML(<span class="string">"SqlMapConfig.xml"</span>);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> SqlSessionFactory <span class="title">getSqlSessionFactory</span>() {</div><div class="line">        <span class="keyword">return</span> INSTANCE.sqlSessionFactory;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="javadoc">/**</span></div><div class="line">     * 根据配置文件创建SqlSessionFactory</div><div class="line">     * </div><div class="line">     *<span class="javadoctag"> @param</span> SqlMapConfigFile</div><div class="line">     *            SqlMapConfig配置文件，文件应该放在当前的classpath中</div><div class="line">     *<span class="javadoctag"> @return</span> SqlSessionFactory</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> SqlSessionFactory <span class="title">buildSqlSessionFactoryFromXML</span>(String SqlMapConfigFile) {</div><div class="line">        Reader reader = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> {</div><div class="line">            reader = Resources.getResourceAsReader(SqlMapConfigFile);</div><div class="line">            <span class="comment">// SqlSessionFactoryBuilder创建完SqlSessionFactory就不需要了，生命周期在方法内，不需要保存本地变量</span></div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> SqlSessionFactoryBuilder().build(reader);</div><div class="line">        } <span class="keyword">catch</span> (IOException e) {</div><div class="line">            e.printStackTrace();</div><div class="line">            Log4jUtil.error(SqlSessionFactoryManager.class, <span class="string">"创建SqlSessionFactory出错"</span>, e);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        } <span class="keyword">finally</span> {</div><div class="line">            <span class="keyword">if</span> (reader != <span class="keyword">null</span>) {</div><div class="line">                <span class="keyword">try</span> {</div><div class="line">                    reader.close();</div><div class="line">                    reader = <span class="keyword">null</span>;</div><div class="line">                } <span class="keyword">catch</span> (IOException e) {</div><div class="line">                }</div><div class="line">            }</div><div class="line">        }</div><div class="line"></div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="javadoc">/**</span></div><div class="line">     * 手动创建SqlSessionFactory</div><div class="line">     * </div><div class="line">     *<span class="javadoctag"> @return</span> SqlSessionFactory</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> SqlSessionFactory <span class="title">buildSqlSessionFactoryFromJava</span>() {</div><div class="line">        DataSource dataSource = <span class="keyword">null</span>;<span class="comment">// 数据库连接</span></div><div class="line">        <span class="comment">// dataSource = BlogDataSourceFactory.getBlogDataSource();</span></div><div class="line">        TransactionFactory transactionFactory = <span class="keyword">new</span> JdbcTransactionFactory();</div><div class="line">        Environment environment = <span class="keyword">new</span> Environment(<span class="string">"development"</span>, transactionFactory, dataSource);</div><div class="line">        Configuration configuration = <span class="keyword">new</span> Configuration(environment);</div><div class="line">        configuration.addMapper(UserMapper.class);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> SqlSessionFactoryBuilder().build(configuration);</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+
+]]></content>
+         
+         
+           
+             
+              <breadCrumb title="java" url="http://dreajay.github.io/categories/java/"/>
+          
+             
+              <breadCrumb title="java-framework" url="http://dreajay.github.io/categories/java/java-framework/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://dreajay.github.io/2014/11/19/Design-Pattern-Singleton/</loc>
     <lastmod>2015-10-28T16:23:32.000Z</lastmod>
     <data>
         <display>
@@ -195,44 +234,6 @@ $ kill -<span class="number">9</span> pid
 
     
   <url>
-    <loc>http://dreajay.github.io/2014/11/21/mybatis%E5%AE%9E%E6%88%98%E4%B9%8BSqlSessionFactory/</loc>
-    <lastmod>2014-12-15T12:50:12.000Z</lastmod>
-    <data>
-        <display>
-        <title>mybatis实战之构建SqlSessionFactory</title>
-        <pubTime>2014-11-21T03:40:57.000Z</pubTime>
-        
-        <tag>java </tag>
-         
-        <tag>mybatis </tag>
-         
-        <tag>SqlSessionFactory </tag>
-         
-         <content><![CDATA[<p>SqlSessionFactory是mybatis的重要角色，是mybatis的整个程序的入口.<br><a id="more"></a></p>
-<ol>
-<li><p>SqlSessionFactory生命周期<br>SqlSessionFactory生命周期为贯穿整个应用程序,一般保持生命周期都使用同一个实例，所以SqlSessionFactory应该保持全局静态变量或使用单利模式来使用它。如果有多个数据源的时候，需要创建不同的SqlSessionFactory。</p>
-</li>
-<li><p>构建SqlSessionFactory<br>在mybatis中构建SqlSessionFactory有两种方式，一种是根据xml配置文件方式，另一种是也手动编写Java代码方式，手动构建比较繁琐，也不好维护，推荐使用xml配置方式，下面是详细代码。</p>
-</li>
-</ol>
-<figure class="highlight Java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="javadoc">/**</span></div><div class="line"> * SqlSessionFactory生命周期为贯穿整个应用程序,一般保持生命周期都使用同一个实例，所以SqlSessionFactory应该保持全局静态变量或使用单利模式来使用它</div><div class="line"> * </div><div class="line"> *<span class="javadoctag"> @author</span> dreajay</div><div class="line"> * </div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SqlSessionFactoryManager</span> </span>{</div><div class="line">    <span class="comment">// SqlSessionFactory一个实例对应一个数据库配置</span></div><div class="line">    <span class="keyword">public</span> SqlSessionFactory sqlSessionFactory;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> SqlSessionFactoryManager INSTANCE = <span class="keyword">new</span> SqlSessionFactoryManager();</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="title">SqlSessionFactoryManager</span>() {</div><div class="line">        sqlSessionFactory = buildSqlSessionFactoryFromXML(<span class="string">"SqlMapConfig.xml"</span>);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> SqlSessionFactory <span class="title">getSqlSessionFactory</span>() {</div><div class="line">        <span class="keyword">return</span> INSTANCE.sqlSessionFactory;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="javadoc">/**</span></div><div class="line">     * 根据配置文件创建SqlSessionFactory</div><div class="line">     * </div><div class="line">     *<span class="javadoctag"> @param</span> SqlMapConfigFile</div><div class="line">     *            SqlMapConfig配置文件，文件应该放在当前的classpath中</div><div class="line">     *<span class="javadoctag"> @return</span> SqlSessionFactory</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> SqlSessionFactory <span class="title">buildSqlSessionFactoryFromXML</span>(String SqlMapConfigFile) {</div><div class="line">        Reader reader = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> {</div><div class="line">            reader = Resources.getResourceAsReader(SqlMapConfigFile);</div><div class="line">            <span class="comment">// SqlSessionFactoryBuilder创建完SqlSessionFactory就不需要了，生命周期在方法内，不需要保存本地变量</span></div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> SqlSessionFactoryBuilder().build(reader);</div><div class="line">        } <span class="keyword">catch</span> (IOException e) {</div><div class="line">            e.printStackTrace();</div><div class="line">            Log4jUtil.error(SqlSessionFactoryManager.class, <span class="string">"创建SqlSessionFactory出错"</span>, e);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        } <span class="keyword">finally</span> {</div><div class="line">            <span class="keyword">if</span> (reader != <span class="keyword">null</span>) {</div><div class="line">                <span class="keyword">try</span> {</div><div class="line">                    reader.close();</div><div class="line">                    reader = <span class="keyword">null</span>;</div><div class="line">                } <span class="keyword">catch</span> (IOException e) {</div><div class="line">                }</div><div class="line">            }</div><div class="line">        }</div><div class="line"></div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="javadoc">/**</span></div><div class="line">     * 手动创建SqlSessionFactory</div><div class="line">     * </div><div class="line">     *<span class="javadoctag"> @return</span> SqlSessionFactory</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> SqlSessionFactory <span class="title">buildSqlSessionFactoryFromJava</span>() {</div><div class="line">        DataSource dataSource = <span class="keyword">null</span>;<span class="comment">// 数据库连接</span></div><div class="line">        <span class="comment">// dataSource = BlogDataSourceFactory.getBlogDataSource();</span></div><div class="line">        TransactionFactory transactionFactory = <span class="keyword">new</span> JdbcTransactionFactory();</div><div class="line">        Environment environment = <span class="keyword">new</span> Environment(<span class="string">"development"</span>, transactionFactory, dataSource);</div><div class="line">        Configuration configuration = <span class="keyword">new</span> Configuration(environment);</div><div class="line">        configuration.addMapper(UserMapper.class);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> SqlSessionFactoryBuilder().build(configuration);</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
-
-]]></content>
-         
-         
-           
-             
-              <breadCrumb title="java" url="http://dreajay.github.io/categories/java/"/>
-          
-             
-              <breadCrumb title="java-framework" url="http://dreajay.github.io/categories/java/java-framework/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://dreajay.github.io/2014/12/08/build-RESTful-use-springmvc/</loc>
     <lastmod>2014-12-15T11:24:23.000Z</lastmod>
     <data>
@@ -288,7 +289,6 @@ HTTP DELETE /<span class="literal">user</span>/<span class="number">1</span> —
     </data>
     </url>
 
-    
     
   <url>
     <loc>http://dreajay.github.io/2014/12/01/effective%20java-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E5%9B%9B%E7%AB%A0%20%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/</loc>
@@ -503,7 +503,7 @@ java.awt.Dimension(<span class="keyword">public</span> <span class="keyword">int
     
     
   <url>
-    <loc>http://dreajay.github.io/2014/11/24/hexo+github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/</loc>
+    <loc>http://dreajay.github.io/2014/11/24/hexo-github-build-blog/</loc>
     <lastmod>2014-11-25T11:22:10.000Z</lastmod>
     <data>
         <display>

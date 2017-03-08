@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title><![CDATA[dreajay's blog]]></title>
-  <subtitle><![CDATA[戴竣杰的博客专栏，梦想还是要有的，万一实现了呢！]]></subtitle>
+  <subtitle><![CDATA[梦想还是要有的，万一实现了呢！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://dreajay.github.io/"/>
-  <updated>2015-10-28T16:26:17.432Z</updated>
+  <updated>2017-03-08T13:39:41.642Z</updated>
   <id>http://dreajay.github.io/</id>
   
   <author>
@@ -415,8 +415,8 @@ java.awt.Dimension(<span class="keyword">public</span> <span class="keyword">int
   
   <entry>
     <title><![CDATA[hexo+github搭建博客系统]]></title>
-    <link href="http://dreajay.github.io/2014/11/24/hexo+github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/"/>
-    <id>http://dreajay.github.io/2014/11/24/hexo+github搭建博客系统/</id>
+    <link href="http://dreajay.github.io/2014/11/24/hexo-github-build-blog/"/>
+    <id>http://dreajay.github.io/2014/11/24/hexo-github-build-blog/</id>
     <published>2014-11-24T13:02:40.000Z</published>
     <updated>2014-11-25T11:22:10.000Z</updated>
     <content type="html"><![CDATA[<p>个人博客大概包含了以下几个模块：首页、文章存档、文章分类、关于、友情链接，有些博客资源丰富，功能强大，还会加上一些诸如站内搜索、评论、分享、微博秀、广告等一些功能，很多框架都可以快速搭建起一个包含以上功能的博客，关于有哪些框架可以搭建博客，可以移步知乎讨论：<a href="http://www.zhihu.com/question/21981094" target="_blank" rel="external">应用github pages创建自己的个人博客</a>。<br><a id="more"></a><br>本博客是用hexo+github搭建的，选择<a href="http://hexo.io/" target="_blank" rel="external">hexo</a>是因为它比较简单，选择<a href="https://github.com" target="_blank" rel="external">github</a>因为它免费，哈哈，免费的东西总是能让人趋之若鹜。本博客的搭建也是参考很多他人资料，会在后面列出，我这里总结一下自己搭建博客各个模块用到的资源。</p>
@@ -504,11 +504,11 @@ java.awt.Dimension(<span class="keyword">public</span> <span class="keyword">int
   </entry>
   
   <entry>
-    <title><![CDATA[mybatis实战之构建SqlSessionFactory]]></title>
-    <link href="http://dreajay.github.io/2014/11/21/mybatis%E5%AE%9E%E6%88%98%E4%B9%8BSqlSessionFactory/"/>
-    <id>http://dreajay.github.io/2014/11/21/mybatis实战之SqlSessionFactory/</id>
+    <title><![CDATA[mybatis构建SqlSessionFactory]]></title>
+    <link href="http://dreajay.github.io/2014/11/21/mybatis-build-SqlSessionFactory/"/>
+    <id>http://dreajay.github.io/2014/11/21/mybatis-build-SqlSessionFactory/</id>
     <published>2014-11-21T03:40:57.000Z</published>
-    <updated>2014-12-15T12:50:12.000Z</updated>
+    <updated>2017-03-08T13:06:07.000Z</updated>
     <content type="html"><![CDATA[<p>SqlSessionFactory是mybatis的重要角色，是mybatis的整个程序的入口.<br><a id="more"></a></p>
 <ol>
 <li><p>SqlSessionFactory生命周期<br>SqlSessionFactory生命周期为贯穿整个应用程序,一般保持生命周期都使用同一个实例，所以SqlSessionFactory应该保持全局静态变量或使用单利模式来使用它。如果有多个数据源的时候，需要创建不同的SqlSessionFactory。</p>
@@ -538,8 +538,8 @@ java.awt.Dimension(<span class="keyword">public</span> <span class="keyword">int
   
   <entry>
     <title><![CDATA[设计模式之单例模式]]></title>
-    <link href="http://dreajay.github.io/2014/11/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
-    <id>http://dreajay.github.io/2014/11/19/设计模式之单例模式/</id>
+    <link href="http://dreajay.github.io/2014/11/19/Design-Pattern-Singleton/"/>
+    <id>http://dreajay.github.io/2014/11/19/Design-Pattern-Singleton/</id>
     <published>2014-11-18T17:49:49.000Z</published>
     <updated>2015-10-28T16:23:32.000Z</updated>
     <content type="html"><![CDATA[<h2 id="定义">定义</h2>

@@ -2,12 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://dreajay.github.io/README.html</loc>
-    <lastmod>2015-10-28T16:26:06.000Z</lastmod>
+    <loc>http://dreajay.github.io/about/index.html</loc>
+    <lastmod>2017-03-08T13:38:47.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://dreajay.github.io/2014/11/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</loc>
+    <loc>http://dreajay.github.io/README.html</loc>
+    <lastmod>2017-03-08T13:23:30.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dreajay.github.io/2014/11/21/mybatis-build-SqlSessionFactory/</loc>
+    <lastmod>2017-03-08T13:06:07.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dreajay.github.io/2014/11/19/Design-Pattern-Singleton/</loc>
     <lastmod>2015-10-28T16:23:32.000Z</lastmod>
   </url>
   
@@ -27,18 +37,8 @@
   </url>
   
   <url>
-    <loc>http://dreajay.github.io/2014/11/21/mybatis%E5%AE%9E%E6%88%98%E4%B9%8BSqlSessionFactory/</loc>
-    <lastmod>2014-12-15T12:50:12.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://dreajay.github.io/2014/12/08/build-RESTful-use-springmvc/</loc>
     <lastmod>2014-12-15T11:24:23.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dreajay.github.io/about/index.html</loc>
-    <lastmod>2014-12-07T08:13:40.000Z</lastmod>
   </url>
   
   <url>
@@ -62,7 +62,7 @@
   </url>
   
   <url>
-    <loc>http://dreajay.github.io/2014/11/24/hexo+github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/</loc>
+    <loc>http://dreajay.github.io/2014/11/24/hexo-github-build-blog/</loc>
     <lastmod>2014-11-25T11:22:10.000Z</lastmod>
   </url>
   
